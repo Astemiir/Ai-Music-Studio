@@ -116,7 +116,7 @@ export const ja = {
   settings: '設定',
 
   // Username Modal
-  welcomeTitle: 'MiniMax Music3 Studioへようこそ',
+  welcomeTitle: 'Ai Music Studioへようこそ',
   welcomeSubtitle: 'AI音楽作成を始めるために名前を入力してください',
   yourName: 'お名前',
   enterYourName: '名前を入力',
@@ -365,7 +365,7 @@ export const ja = {
   failedToDeleteSong: '曲の削除に失敗しました',
 
   // Sidebar
-  aceStepUI: 'MiniMax Music3 Studio',
+  aceStepUI: 'Ai Music Studio',
   collapseSidebar: 'サイドバーを折りたたむ',
   expandSidebar: 'サイドバーを展開',
   monitoring: 'モニタリング',
@@ -865,7 +865,7 @@ export const ja = {
   shareViaEmail: 'メールで共有',
   copyLink: 'リンクをコピー',
   emailSubject: 'このAI曲をチェックしてください',
-  emailBody: 'こんにちは！\n\n私がこのAI生成の曲を作りました。気に入ってもらえると思います：\n\n「{title}」by {creator}\n{style}\n\nここで聴いてください：{url}\n\nMiniMax Music3 Studioで作成。',
+  emailBody: 'こんにちは！\n\n私がこのAI生成の曲を作りました。気に入ってもらえると思います：\n\n「{title}」by {creator}\n{style}\n\nここで聴いてください：{url}\n\nAi Music Studioで作成。',
 
   // Reference Modal
   referenceModalTitle: 'リファレンス',
@@ -1269,7 +1269,7 @@ export const ja = {
     dockMonitor: 'リソースモニターを戻す',
     firstRun: '初回起動',
     studioOfflineTitle: 'スタジオが起動していません',
-    studioOfflineBody: 'ウィンドウは開いていますが、スタジオのサービスが応答しません。アプリが終了したか停止しています。MiniMax Music3 Studio を再度起動すると、この画面は自動で戻ります。',
+    studioOfflineBody: 'ウィンドウは開いていますが、スタジオのサービスが応答しません。アプリが終了したか停止しています。Ai Music Studio を再度起動すると、この画面は自動で戻ります。',
     studioOfflineRetrying: '再接続を試しています',
     studioOfflineRetry: '今すぐ確認',
     resourcesTitle: 'モデルと量子化',
@@ -1334,6 +1334,10 @@ export const ja = {
     engineUnavailable: 'ローカルランタイムを利用できません',
     engineReachable: 'Music3 エンジンに接続済み',
     engineStarting: 'Music3 エンジン起動中',
+    engineChoice: 'エンジン',
+    engineYue2: 'YuE2',
+    engineMusic3: 'Music 3',
+    engineSwitching: 'エンジンを切り替えています…',
     profileReady: 'プロファイル準備完了',
     profileNotInstalled: 'モデルプロファイル未導入',
     noProfile: 'プロファイルなし',
@@ -1475,7 +1479,7 @@ export const ja = {
     assistantOwnFile: 'または既にこの PC にある GGUF',
     assistantOwnFileHint: '既にあるテキスト GGUF のフルパス。そのまま使い、ダウンロードもコピーもしません。',
     serviceUnavailable: 'Studio サービスが応答しません',
-    serviceUnavailableHint: 'ローカルサービスが起動していません。MiniMax Music3 Studio を再起動してください。ライブラリは失われません。',
+    serviceUnavailableHint: 'ローカルサービスが起動していません。Ai Music Studio を再起動してください。ライブラリは失われません。',
     karaokeSection: 'カラオケのタイミング',
     karaokeHint: '曲自身の歌詞を認識器のタイムラインに乗せ、ビデオスタジオとプレイヤーが行を追えるようにします。既定はオフで、指示するまで何もダウンロードしません。',
     karaokeEnable: '新しいトラックに自動でタイミングを付ける',

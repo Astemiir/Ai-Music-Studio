@@ -115,7 +115,7 @@ export const en = {
     settings: 'Settings',
 
     // Username Modal
-    welcomeTitle: 'Welcome to MiniMax Music3 Studio',
+    welcomeTitle: 'Welcome to Ai Music Studio',
     welcomeSubtitle: 'Enter your name to get started creating AI music',
     yourName: 'Your Name',
     enterYourName: 'Enter your name',
@@ -368,7 +368,7 @@ export const en = {
     failedToDeleteSong: 'Failed to delete song',
 
     // Sidebar
-    aceStepUI: 'MiniMax Music3 Studio',
+    aceStepUI: 'Ai Music Studio',
     collapseSidebar: 'Collapse Sidebar',
     expandSidebar: 'Expand Sidebar',
     monitoring: 'Monitoring',
@@ -868,7 +868,7 @@ export const en = {
     shareViaEmail: 'Share via Email',
     copyLink: 'Copy Link',
     emailSubject: 'Check out this AI song',
-    emailBody: "Hey!\n\nI created this AI-generated song and thought you\'d love it:\n\n\"{title}\" by {creator}\n{style}\n\nListen here: {url}\n\nMade with MiniMax Music3 Studio.",
+    emailBody: "Hey!\n\nI created this AI-generated song and thought you\'d love it:\n\n\"{title}\" by {creator}\n{style}\n\nListen here: {url}\n\nMade with Ai Music Studio.",
 
     // Reference Modal
     referenceModalTitle: 'Reference',
@@ -1274,7 +1274,7 @@ export const en = {
     dockMonitor: 'Dock the resource monitor',
     firstRun: 'First run',
     studioOfflineTitle: 'The studio is not running',
-    studioOfflineBody: 'This window is open but the studio service is not answering. It was closed, or it stopped. Start MiniMax Music3 Studio again and this page comes back on its own.',
+    studioOfflineBody: 'This window is open but the studio service is not answering. It was closed, or it stopped. Start Ai Music Studio again and this page comes back on its own.',
     studioOfflineRetrying: 'Trying to reconnect',
     studioOfflineRetry: 'Try now',
     resourcesTitle: 'Models and quantisations',
@@ -1339,6 +1339,10 @@ export const en = {
     engineUnavailable: 'Local runtime unavailable',
     engineReachable: 'Music3 engine reachable',
     engineStarting: 'Music3 engine starting',
+    engineChoice: 'Engine',
+    engineYue2: 'YuE2',
+    engineMusic3: 'Music 3',
+    engineSwitching: 'Switching engine…',
     profileReady: 'Profile ready',
     profileNotInstalled: 'Model profile not installed',
     noProfile: 'No profile',
@@ -1480,7 +1484,7 @@ export const en = {
     assistantOwnFile: 'Or a GGUF already on this machine',
     assistantOwnFileHint: 'Full path to a text GGUF you already have. It is used as is - nothing is downloaded, nothing is copied.',
     serviceUnavailable: 'Studio service is not responding',
-    serviceUnavailableHint: 'The local service is not running. Restart MiniMax Music3 Studio; nothing in your library is lost.',
+    serviceUnavailableHint: 'The local service is not running. Restart Ai Music Studio; nothing in your library is lost.',
     karaokeSection: 'Karaoke timings',
     karaokeHint: "The track's own lyrics are put on a recogniser's clock, so the video studio and the player can follow along. Off by default; nothing is downloaded until you ask.",
     karaokeEnable: 'Time every new track automatically',

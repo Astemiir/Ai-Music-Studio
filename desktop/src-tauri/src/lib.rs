@@ -1,11 +1,17 @@
-//! Desktop shell for YuE2 Studio.
+//! Desktop shell for Ai Music Studio.
 //!
-//! The whole studio is this one executable: the window, and the native service
-//! hosted inside it. The service in turn supervises the `yue2.cpp`
-//! engine, so there is exactly one owner of that process and no launcher
-//! script in the release layout. If a compatible service is already listening
-//! on loopback — a developer running it separately — the shell uses it instead
-//! of starting a second one.
+//! One window, and one of two studio services running as a process of its own:
+//! the YuE2 service (`yue2-service.exe`, this crate) or the Music 3 service
+//! (`mm3-service.exe`, built from the MiniMax studio). Each service supervises
+//! its own engine - `yue2.cpp` or `minimaxmusic.cpp` - and listens on the port
+//! the window talks to, so the interface does not care which engine answers.
+//!
+//! They are separate processes rather than one service hosted inside the shell
+//! because the user may switch engines: the service holding the port has to be
+//! stopped and the other started in its place, and a service living in this
+//! process could not be stopped without closing the window. A compatible
+//! service already listening on loopback - a developer running it separately -
+//! is still used instead of starting a second one.
 
 use std::{
     net::{Ipv4Addr, SocketAddrV4, TcpStream},
@@ -14,8 +20,30 @@ use std::{
 };
 
 const SERVER_PORT: u16 = 8791;
+/// The engine this studio is built around, and the one it runs until the user
+/// picks another. `yue2` is this crate's own service; `mm3` is the second
+/// service started in its place (see `chosen_engine`).
+const YUE2_ENGINE: &str = "yue2";
+const MM3_ENGINE: &str = "mm3";
+/// The Music 3 service, built from the MiniMax studio and shipped beside the
+/// executable.
+const MUSIC3_SERVICE: &str = "mm3-service.exe";
+/// The YuE2 service, built from this crate and shipped beside the executable.
+/// It runs as a process of its own so the other engine can take the port
+/// without the window being closed.
+const YUE2_SERVICE: &str = "yue2-service.exe";
+
+/// The service process the window started, whichever engine it belongs to.
+///
+/// Held so the engine switch can stop it: the replacement has to be the
+/// process holding the port, and nothing else can stop a service but its
+/// owner. The service takes its engine down with it - the engine lives in a
+/// kill-on-close job object of the service's own - so killing one process is
+/// the whole of stopping an engine.
+static ENGINE_SERVICE: std::sync::Mutex<Option<std::process::Child>> = std::sync::Mutex::new(None);
+
 const RELEASES_URL: &str = "https://github.com/timoncool/YuE2-Studio/releases/latest";
-const STUDIO_DATA_DIRECTORY: &str = "YuE2 Studio";
+const STUDIO_DATA_DIRECTORY: &str = "Ai Music Studio";
 
 /// Mutable studio data must not be derived from the process working directory
 /// or from the installed executable directory: a Start Menu shortcut is free
@@ -50,17 +78,17 @@ fn studio_data_directory() -> PathBuf {
     #[cfg(not(windows))]
     {
         if let Some(root) = std::env::var_os("XDG_DATA_HOME") {
-            return PathBuf::from(root).join("yue2-studio");
+            return PathBuf::from(root).join("ai-music-studio");
         }
         if let Some(home) = std::env::var_os("HOME") {
             return PathBuf::from(home)
                 .join(".local")
                 .join("share")
-                .join("yue2-studio");
+                .join("ai-music-studio");
         }
     }
 
-    std::env::temp_dir().join("yue2-studio")
+    std::env::temp_dir().join("ai-music-studio")
 }
 
 /// A portable copy, or an installation into a folder it can write to: then the
@@ -139,6 +167,19 @@ fn wait_until_ready(timeout: Duration) -> bool {
     false
 }
 
+/// Waits for the studio port to be free, which is how a stopped service
+/// announces that its replacement may take it.
+fn wait_until_port_free(timeout: Duration) -> bool {
+    let started = Instant::now();
+    while started.elapsed() < timeout {
+        if !service_is_ready() {
+            return true;
+        }
+        std::thread::sleep(Duration::from_millis(120));
+    }
+    false
+}
+
 fn executable_directory() -> PathBuf {
     std::env::current_exe()
         .ok()
@@ -167,10 +208,12 @@ fn directory_is_writable(path: &std::path::Path) -> bool {
 
 /// Hosts the studio service inside this process.
 ///
-/// A release is one executable: there is no second binary to locate, no
-/// launcher script, and nothing that can be left running if the window is
-/// closed. The service is started on its own runtime thread and the window
-/// only opens once it answers on loopback.
+/// This is the fallback for a build shipped without `yue2-service.exe`: the
+/// studio then runs its own service as before, and only the engine switch is
+/// the poorer for it (a service that lives in the window cannot be stopped
+/// without closing it, so switching restarts the studio). The service is
+/// started on its own runtime thread and the window only opens once it answers
+/// on loopback.
 fn start_service() -> Result<(), String> {
     if service_is_ready() {
         return Ok(());
@@ -214,6 +257,268 @@ fn start_service() -> Result<(), String> {
     }
 }
 
+/// The engine this studio runs.
+///
+/// The studio is YuE2 unless the user chose otherwise: its own service is the
+/// one compiled into this executable, and it supervises `yue-server`. Choosing
+/// Music 3 starts the second service instead, which brings `mm-server` and the
+/// Music 3 model set with it.
+fn chosen_engine() -> String {
+    std::fs::read_to_string(engine_choice_path())
+        .ok()
+        .and_then(|text| serde_json::from_str::<serde_json::Value>(&text).ok())
+        .and_then(|value| value.get("engine").and_then(|engine| engine.as_str()).map(str::to_owned))
+        .filter(|engine| !engine.is_empty())
+        .unwrap_or_else(|| YUE2_ENGINE.to_owned())
+}
+
+/// Where the engine this studio runs is remembered between starts.
+fn engine_choice_path() -> PathBuf {
+    studio_data_directory().join("studio-engine.json")
+}
+
+/// The engine this window is running, so closing it can write the choice down.
+static CURRENT_ENGINE: std::sync::Mutex<Option<String>> = std::sync::Mutex::new(None);
+
+fn remember_engine(engine: &str) {
+    if let Ok(mut current) = CURRENT_ENGINE.lock() {
+        *current = Some(engine.to_owned());
+    }
+}
+
+fn current_engine() -> Option<String> {
+    CURRENT_ENGINE.lock().ok().and_then(|current| current.clone())
+}
+
+/// The command that starts the service of `engine`.
+///
+/// Each service is told where everything it owns lives: the data folder the
+/// studio uses, the engine bundle and model set beside it, and a settings file
+/// of its own - the two engines keep different engine options (YuE2 has the VAE
+/// tiling knobs, Music 3 has split CFG forwards), so neither may read the
+/// other's. Its output goes to a log of its own in `data`.
+fn engine_service_command(engine: &str) -> Result<std::process::Command, String> {
+    let root = executable_directory();
+    let data = studio_data_directory();
+    let (service, log_name) = if engine == MM3_ENGINE {
+        (MUSIC3_SERVICE, "mm3-service.log")
+    } else {
+        (YUE2_SERVICE, "yue2-service.log")
+    };
+    let program = root.join(service);
+    if !program.is_file() {
+        return Err(format!("the {engine} service is missing: {}", program.display()));
+    }
+
+    let mut command = std::process::Command::new(&program);
+    command.current_dir(&root).stdin(std::process::Stdio::null());
+    #[cfg(windows)]
+    {
+        use std::os::windows::process::CommandExt;
+        // Started from a windowed process, a console program opens a console
+        // window of its own: it would sit beside the studio and flash on every
+        // engine switch. Its output goes to the log file either way.
+        const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+        command.creation_flags(CREATE_NO_WINDOW);
+    }
+    if engine == MM3_ENGINE {
+        command
+            .env("MINIMAX_STUDIO_PORT", SERVER_PORT.to_string())
+            .env("MINIMAX_STUDIO_DATA_ROOT", &data)
+            .env("MINIMAX_MM_SERVER_ROOT", root.join("resources").join("minimaxmusic-cpp"))
+            .env("MINIMAX_MUSIC_MODELS_ROOT", data.join("models").join("minimaxmusic-cpp"))
+            .env("MINIMAX_STUDIO_SETTINGS_PATH", data.join("studio-settings-mm3.json"));
+    } else {
+        let models = std::env::var_os("YUE_MODELS_ROOT")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| data.join("models").join("yue2-cpp"));
+        command
+            .env("YUE_STUDIO_PORT", SERVER_PORT.to_string())
+            .env("YUE_STUDIO_DATA_ROOT", &data)
+            .env("YUE_MODELS_ROOT", models)
+            .env("YUE_STUDIO_SETTINGS_PATH", data.join("studio-settings.json"));
+    }
+
+    // Without a log file the service's output would go nowhere at all.
+    match std::fs::File::create(data.join(log_name)) {
+        Ok(file) => match file.try_clone() {
+            Ok(copy) => {
+                command.stdout(file).stderr(copy);
+            }
+            Err(_) => {
+                command.stdout(std::process::Stdio::null()).stderr(std::process::Stdio::null());
+            }
+        },
+        Err(_) => {
+            command.stdout(std::process::Stdio::null()).stderr(std::process::Stdio::null());
+        }
+    }
+    Ok(command)
+}
+
+/// Empties the engine logs of this data folder.
+///
+/// An engine appends to its own log for as long as it runs and only trims it
+/// once it is large, so without this a log would outlive session after session
+/// and stop being something to read. One window is one session: the files are
+/// emptied here, when the studio starts, and not when the engine is switched -
+/// the log of the engine that ran a minute ago is still wanted then.
+fn clear_engine_logs(data: &Path) {
+    for name in ["engine.log", "engine-startup.log"] {
+        let path = data.join(name);
+        if path.is_file() && std::fs::File::create(&path).is_err() {
+            eprintln!("could not empty {}", path.display());
+        }
+    }
+}
+
+/// Starts the service of `engine` and waits until it answers on the studio
+/// port. The port must be free; the previous service is stopped first.
+///
+/// A build shipped without `yue2-service.exe` falls back to the service
+/// compiled into this executable - the one case where the studio runs its
+/// service in its own process.
+fn start_engine_service(engine: &str) -> Result<(), String> {
+    if service_is_ready() {
+        return Ok(());
+    }
+
+    let mut command = match engine_service_command(engine) {
+        Ok(command) => command,
+        Err(error) if engine == YUE2_ENGINE => {
+            eprintln!("{error}; using the service built into this executable");
+            return start_service();
+        }
+        Err(error) => return Err(error),
+    };
+
+    let child = command
+        .spawn()
+        .map_err(|error| format!("could not start the {engine} service: {error}"))?;
+    if let Ok(mut running) = ENGINE_SERVICE.lock() {
+        if let Some(mut previous) = running.replace(child) {
+            let _ = previous.kill();
+            let _ = previous.wait();
+        }
+    }
+
+    if wait_until_ready(Duration::from_secs(45)) {
+        Ok(())
+    } else {
+        Err(format!("the {engine} service did not become ready on 127.0.0.1:{SERVER_PORT}"))
+    }
+}
+
+/// Stops the service holding the studio port, taking its engine with it.
+///
+/// The engine lives in a kill-on-close job object of the service's own, so the
+/// service dying is the whole of stopping an engine. Nothing can stop a service
+/// but its owner, so this only works for the process started here.
+fn stop_engine_service() -> Result<(), String> {
+    let running = ENGINE_SERVICE.lock().ok().and_then(|mut guard| guard.take());
+    let Some(mut child) = running else {
+        return Err("the studio service was not started by this window, so it cannot be replaced".into());
+    };
+    let _ = child.kill();
+    let _ = child.wait();
+    if wait_until_port_free(Duration::from_secs(15)) {
+        Ok(())
+    } else {
+        Err(format!("port {SERVER_PORT} stayed busy after the studio service was stopped"))
+    }
+}
+
+/// Switches the studio to the other engine without closing the window.
+///
+/// The service holding the port is stopped - its engine goes with it - and the
+/// service of the chosen engine takes its place. The choice is written first,
+/// so a studio restarted at any point in between comes up on the engine the
+/// user asked for.
+#[tauri::command]
+async fn set_engine(app: tauri::AppHandle, engine: String) -> Result<(), String> {
+    let engine = if engine == MM3_ENGINE { MM3_ENGINE } else { YUE2_ENGINE }.to_owned();
+    // Asking for the engine that is already answering is not a switch: the
+    // service on the port is the one the user wants, and restarting it would
+    // only cost a reload and whatever the engines had loaded.
+    if chosen_engine() == engine && service_is_ready() {
+        return Ok(());
+    }
+    save_engine_choice(&engine)?;
+
+    let can_replace = ENGINE_SERVICE.lock().map(|running| running.is_some()).unwrap_or(false);
+    if !can_replace {
+        // The studio runs the service compiled into this executable (a build
+        // shipped without `yue2-service.exe`), or one started outside the
+        // window. Neither can be stopped from here, so the studio restarts.
+        app.restart();
+    }
+
+    let target = engine.clone();
+    tauri::async_runtime::spawn_blocking(move || {
+        stop_engine_service()?;
+        start_engine_service(&target)
+    })
+    .await
+    .map_err(|error| format!("the engine switch did not finish: {error}"))??;
+
+    // The window's own mark changes with the engine, the way the name in its
+    // sidebar does: the taskbar must not keep calling it the other studio.
+    apply_engine_icon(&app, &engine);
+    remember_engine(&engine);
+
+    // The window stays, its page does not. Everything the interface shows - the
+    // form, the tabs, which engine is on the line - is decided by the service,
+    // and only a page that asks the new one afresh sees the other engine. The
+    // brief flash is the switch.
+    tauri::async_runtime::spawn(async move {
+        use tauri::Manager as _;
+        tokio::time::sleep(Duration::from_millis(250)).await;
+        for (_, window) in app.webview_windows() {
+            let _ = window.eval("window.location.reload();");
+        }
+    });
+    Ok(())
+}
+
+/// Writes the engine the studio should run; `chosen_engine` reads it on start.
+fn save_engine_choice(engine: &str) -> Result<(), String> {
+    let path = engine_choice_path();
+    if let Some(parent) = path.parent() {
+        std::fs::create_dir_all(parent).map_err(|error| error.to_string())?;
+    }
+    std::fs::write(&path, format!("{{\n  \"engine\": \"{engine}\"\n}}\n"))
+        .map_err(|error| format!("could not save the engine choice: {error}"))
+}
+
+/// The mark of the engine that is answering, carried inside this executable.
+///
+/// The icon is the one the window shows in its title bar and the taskbar, and
+/// one window over two products has to name the one that is actually running:
+/// the mark on both engine bundles is the one their own studio ships.
+fn engine_icon(engine: &str) -> Option<tauri::image::Image<'static>> {
+    let bytes: &'static [u8] = if engine == MM3_ENGINE {
+        include_bytes!("../icons/engine-m3.png")
+    } else {
+        include_bytes!("../icons/engine-yue2.png")
+    };
+    tauri::image::Image::from_bytes(bytes).ok()
+}
+
+/// Puts the engine's mark on every window of the studio.
+fn apply_engine_icon(app: &tauri::AppHandle, engine: &str) {
+    use tauri::Manager as _;
+    let Some(icon) = engine_icon(engine) else {
+        eprintln!("the icon of the {engine} engine could not be read");
+        return;
+    };
+    for (_, window) in app.webview_windows() {
+        let _ = window.set_icon(icon.clone());
+    }
+}
+
+/// Unused in this build: the studio never checks the authors' releases, because
+/// installing one would replace it with a single-engine build (see `run`).
+#[allow(dead_code)]
 fn spawn_update_check(app: tauri::AppHandle, portable: bool) {
     use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogKind};
     use tauri_plugin_updater::UpdaterExt;
@@ -466,29 +771,36 @@ pub fn run() {
     let context = tauri::generate_context!();
     music_server::set_studio_version(context.package_info().version.to_string());
 
-    if let Err(error) = start_service() {
+    // One start is one session: the engine logs of the session before are let
+    // go of here and nowhere else, so switching engines keeps both logs.
+    clear_engine_logs(&studio_data_directory());
+
+    // A start remembers the engine it runs, and writes the default down when
+    // nothing was ever chosen: closing the studio hands the same engine to the
+    // start after it.
+    let engine = chosen_engine();
+    remember_engine(&engine);
+    if !engine_choice_path().is_file() {
+        if let Err(error) = save_engine_choice(&engine) {
+            eprintln!("could not remember the engine: {error}");
+        }
+    }
+
+    // The chosen engine decides which service answers on this port. Both are
+    // processes of their own beside the executable, so the switch can stop one
+    // and start the other without the window being closed.
+    if let Err(error) = start_engine_service(&engine) {
         eprintln!("failed to start the studio service: {error}");
     }
 
-    // The updater is configured only in release builds, where the signing
-    // public key and the release endpoint are injected into the config. The
-    // plugin refuses to initialise without that section and would take the
-    // whole window down with it, so a development build simply runs without an
-    // updater instead of crashing at launch.
-    let updater_configured = context
-        .config()
-        .plugins
-        .0
-        .get("updater")
-        .is_some_and(|value| !value.is_null());
-
-    let mut builder = tauri::Builder::default()
+    // The updater is deliberately not configured in this build. It points at
+    // the authors' releases, and installing one would replace this studio with
+    // a single-engine build of theirs - the hybrid would overwrite itself. The
+    // second engine and its models are updated by the studio, not by them.
+    let builder = tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![open_visualizer_window, set_window_region]);
-    if updater_configured {
-        builder = builder.plugin(tauri_plugin_updater::Builder::new().build());
-    }
+        .invoke_handler(tauri::generate_handler![open_visualizer_window, set_window_region, set_engine]);
 
     builder
         .setup(move |app| {
@@ -534,9 +846,11 @@ pub fn run() {
                 None => window,
             };
 
-            window.build()?;
-            if updater_configured {
-                spawn_update_check(app.handle().clone(), is_portable());
+            let window = window.build()?;
+            // The mark of the engine this start runs: the title bar and the
+            // taskbar name the same studio the page does.
+            if let Some(icon) = engine_icon(&chosen_engine()) {
+                let _ = window.set_icon(icon);
             }
             // The webview starts loading the moment the window exists, and the
             // service can finish binding a fraction of a second later. That is
@@ -567,7 +881,18 @@ pub fn run() {
             }
             Ok(())
         })
-        .run(context)
-        .expect("error while running YuE2 Studio");
+        .build(context)
+        .expect("error while building Ai Music Studio")
+        .run(|_handle, event| {
+            // Closing writes down what the window was running, so the next
+            // start opens on the same engine.
+            if let tauri::RunEvent::Exit = event {
+                if let Some(engine) = current_engine() {
+                    if let Err(error) = save_engine_choice(&engine) {
+                        eprintln!("could not remember the engine on exit: {error}");
+                    }
+                }
+            }
+        });
 }
 

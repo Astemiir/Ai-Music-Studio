@@ -49,10 +49,17 @@ const PROFILE_BADGE: Record<string, string> = {
     light: 'Light',
 };
 
+/**
+ * The studio a track came from: the library holds what both engines made, and
+ * a Music 3 song labelled YuE2 would be a lie the moment the two share a
+ * window.
+ */
+const engineName = (song: Song): string => (song.engine_id === 'minimaxmusic-cpp' ? 'Music 3' : 'YuE2');
+
 const getProfileBadge = (song: Song): string => {
     if (song.ditModel === 'openrouter') return 'Cloud';
     if (song.ditModel === 'imported-audio') return 'Import';
-    return song.lmModel ? PROFILE_BADGE[song.lmModel] ?? song.lmModel : 'YuE2';
+    return song.lmModel ? PROFILE_BADGE[song.lmModel] ?? song.lmModel : engineName(song);
 };
 
 const createDragPreview = (element: HTMLElement) => {
@@ -725,7 +732,7 @@ const SongItem: React.FC<SongItemProps> = ({
                         )}
                     </div>
                     <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
-                        <span>{song.ditModel === 'imported-audio' ? t('importedAudio') : 'YuE2'}</span>
+                        <span>{song.ditModel === 'imported-audio' ? t('importedAudio') : engineName(song)}</span>
                         {song.nativeReplayAvailable && <span title={t('replayAvailable')} className="rounded bg-zinc-200/70 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide dark:bg-white/10">replay</span>}
                     </div>
                     <p className="text-xs text-zinc-500 dark:text-zinc-500 line-clamp-2 pt-1 font-medium max-w-2xl">

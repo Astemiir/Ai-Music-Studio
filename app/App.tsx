@@ -1,6 +1,7 @@
 import React, { Activity, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { CreatePanel, type CreateRequest } from './components/CreatePanel';
+import { CreatePanelMusic3 } from './components/CreatePanelMusic3';
 import { SongList } from './components/SongList';
 import { RightSidebar } from './components/RightSidebar';
 import { Player } from './components/Player';
@@ -14,7 +15,7 @@ import { SongActions, SongActionsProvider } from './context/SongActionsContext';
 import { useBridgeCommand } from './services/mcpBridge';
 import { apiUrl } from './services/apiBase';
 import { SettingsModal } from './components/SettingsModal';
-import { Song, YueRequest, YueJob, YueProgress, View, Playlist } from './types';
+import { Song, YueRequest, Music3Request, YueJob, YueProgress, View, Playlist } from './types';
 // Resizable panel hook
 const PANEL_MAX_SHARE = 0.4;
 const PANEL_KEY_STEP = 16;
@@ -137,7 +138,7 @@ function NativeUnavailableView({ title, detail }: { title: string; detail: strin
   return (
     <div className="flex h-full min-h-0 flex-1 items-center justify-center overflow-y-auto bg-white px-6 py-10 dark:bg-suno">
       <section className="w-full max-w-xl rounded-2xl border border-amber-500/30 bg-amber-500/5 p-6 text-center shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600 dark:text-amber-400">YuE2 Studio</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600 dark:text-amber-400">Ai Music Studio</p>
         <h1 className="mt-2 text-xl font-bold text-zinc-950 dark:text-white">{title}</h1>
         <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-300">{detail}</p>
       </section>
@@ -158,6 +159,12 @@ function AppContent() {
   const leftPanel = useResizablePanel('create', 420, 320, 1200, 'left', t('createMusic'));
   const rightPanel = useResizablePanel('details', 400, 320, 1200, 'right', t('songDetails'));
   const [nativeSetupReady, setNativeSetupReady] = useState(false);
+  // Which engine answers: the two services name themselves on /setup/status,
+  // and with them comes the whole way the studio looks and asks - the form,
+  // its tabs, the mark in the sidebar. A window that cannot ask keeps the YuE2
+  // preset, which is what a studio without a service would show anyway.
+  const [engineId, setEngineId] = useState<string | null>(null);
+  const music3Engine = engineId === 'minimaxmusic-cpp';
   // A track sent here from a menu's "separate into stems".
   const [stemsSongId, setStemsSongId] = useState<string | null>(null);
   // Which of the three situations the studio is in. It starts unknown, and
@@ -168,9 +175,10 @@ function AppContent() {
   useEffect(() => {
     const read = () => void fetch('/setup/status')
       .then((response) => (response.ok ? response.json() : Promise.reject(new Error())))
-      .then((status: { ready?: boolean; engine_ready?: boolean }) => {
+      .then((status: { ready?: boolean; engine_ready?: boolean; engine_id?: string }) => {
         setNativeModels(status.ready === true ? 'installed' : 'missing');
         if (status.ready && status.engine_ready) setNativeSetupReady(true);
+        setEngineId(status.engine_id ?? null);
       })
       // A service that does not answer is not an engine that is still coming
       // up: the application has been closed, and saying "starting" at a dead
@@ -1056,24 +1064,29 @@ function AppContent() {
     return () => { cancelled = true; window.clearInterval(timer); };
   }, [activeJobCount]);
 
-  const handleGenerate = async (params: YueRequest & { _tempId?: string }) => {
+  // Both forms hand the song back in their own engine's language: the form the
+  // user is looking at was chosen together with the engine, so the request it
+  // builds is the one that engine takes - nothing is translated here, which is
+  // what a translation could only get wrong.
+  const handleGenerate = async (params: (YueRequest | Music3Request) & { _tempId?: string }) => {
     const tempId = params._tempId || `temp_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+    const description = 'caption' in params ? params.caption : params.style;
     if (!params._tempId) {
       setSongs(prev => [{
         id: tempId,
         title: params.title?.trim() || t('generating') || 'Generating...',
         lyrics: params.lyrics || '',
-        style: params.style || '',
+        style: description || '',
         coverUrl: '',
         duration: '--:--',
         createdAt: new Date(),
         isGenerating: true,
         stage: 'stageWaitingInQueue',
-        tags: ['yue2'],
+        tags: [music3Engine ? 'minimax' : 'yue2'],
       }, ...prev]);
     } else {
       setSongs(prev => prev.map(song => song.id === tempId
-        ? { ...song, title: params.title?.trim() || song.title, style: params.style || song.style, lyrics: params.lyrics || song.lyrics }
+        ? { ...song, title: params.title?.trim() || song.title, style: description || song.style, lyrics: params.lyrics || song.lyrics }
         : song));
     }
 
@@ -1547,13 +1560,22 @@ function AppContent() {
               `}
               style={{ width: window.innerWidth >= 768 ? leftPanel.width : undefined }}
             >
-              <CreatePanel
-                onGenerate={handleGenerate}
-                isGenerating={isGenerating}
-                activeJobCount={activeJobCount + pendingClickCount}
-                initialData={reuseData}
-                request={createRequest}
-              />
+              {music3Engine ? (
+                <CreatePanelMusic3
+                  onGenerate={handleGenerate}
+                  isGenerating={isGenerating}
+                  activeJobCount={activeJobCount + pendingClickCount}
+                  initialData={reuseData}
+                />
+              ) : (
+                <CreatePanel
+                  onGenerate={handleGenerate}
+                  isGenerating={isGenerating}
+                  activeJobCount={activeJobCount + pendingClickCount}
+                  initialData={reuseData}
+                  request={createRequest}
+                />
+              )}
             </div>
             {leftPanel.handle}
 
@@ -1674,6 +1696,7 @@ function AppContent() {
           onOpenSettings={() => setShowSettingsModal(true)}
           isOpen={showLeftSidebar}
           onToggle={() => setShowLeftSidebar(!showLeftSidebar)}
+          engineId={engineId}
         />
 
         <main className="relative ml-[72px] flex min-h-0 min-w-0 flex-1 overflow-hidden md:ml-0">

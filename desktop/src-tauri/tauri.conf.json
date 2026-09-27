@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "YuE2 Studio",
+  "productName": "Ai Music Studio",
   "version": "3.0.0",
   "identifier": "com.timoncool.yue2-studio",
   "build": {
@@ -15,7 +15,7 @@
         "label": "main",
         "dragDropEnabled": false,
         "create": false,
-        "title": "YuE2 Studio",
+        "title": "Ai Music Studio",
         "width": 1440,
         "height": 960,
         "minWidth": 1024,
@@ -60,5 +60,5 @@
       }
     }
   },
-  "mainBinaryName": "YuE2-Studio"
+  "mainBinaryName": "Ai-Music-Studio"
 }

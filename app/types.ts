@@ -25,6 +25,8 @@ export interface Song {
   ditModel?: string;
   lmModel?: string;
   lmBackend?: string;
+  /** The engine that made the track: `yue2-cpp` or `minimaxmusic-cpp`. */
+  engine_id?: string;
   openrouterModel?: string | null;
   generationTime?: number;
   lrcContent?: string;
@@ -118,6 +120,38 @@ export interface YueRequest {
   /** The library song whose melody this cover sings; the new song names it. */
   cover_of?: string;
   cover_prompt?: string;
+  /** LoRA adapters for this song, each with a strength per engine slot. */
+  adapters?: { id: string; scales: Record<string, number> }[];
+}
+
+/**
+ * A MiniMax Music 3 request as `/v1/music/jobs` accepts it when the Music 3
+ * service answers. Field names are that engine's own (`MM3Request` in
+ * minimaxmusic.cpp); the two engines' requests share no fields but their
+ * namesake, which is why the form is chosen together with the engine.
+ */
+export interface Music3Request {
+  caption: string;
+  lyrics: string;
+  duration_seconds: number;
+  steps: number;
+  /** DiT (flow-matching) noise seed. Omit for a random seed. */
+  seed?: number;
+  /** Autoregressive language-model seed. Omit for a random seed. */
+  lm_seed?: number;
+  lm_cfg: number;
+  lm_top_k: number;
+  /** Songs sampled from this prompt, each with its own LM stream. */
+  lm_batch_size: number;
+  /** Flow-matching variations per song, 1..9. */
+  synth_batch_size: number;
+  dit_cfg: number;
+  /** Percentile peak normalisation; 0 disables clipping. WAV32 ignores it. */
+  peak_clip: number;
+  output_format: 'mp3' | 'wav16' | 'wav24' | 'wav32';
+  mp3_bitrate: number;
+  /** Library title only — never sent to the engine. */
+  title?: string;
   /** LoRA adapters for this song, each with a strength per engine slot. */
   adapters?: { id: string; scales: Record<string, number> }[];
 }

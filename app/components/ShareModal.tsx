@@ -62,12 +62,12 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, song })
   const shareUrl = `${window.location.origin}/song/${song.id}`;
 
   // Platform-specific share text for better engagement
-  const defaultShareText = `🎵 "${song.title}" ${song.style ? `(${song.style})` : ''} - Made with YuE2 Studio`;
-  const twitterText = `🔥 Just created "${song.title}" with YuE2 Studio! ${song.style ? `#${song.style.replace(/\s+/g, '')}` : ''} #AIMusic #YuE2`;
-  const redditTitle = `[AI Music] ${song.title} - ${song.style || 'Original'} | Created with YuE2 Studio`;
-  const whatsAppText = `🎧 Listen to this AI-generated song!\n\n"${song.title}" by ${song.creator || 'Unknown Artist'}\n${song.style ? `Genre: ${song.style}` : ''}\n\nMade with YuE2 Studio.`;
-  const telegramText = `🎵 "${song.title}" by ${song.creator || 'Unknown Artist'}\n${song.style ? `🎸 ${song.style}` : ''}\n\n🤖 Made with YuE2 Studio`;
-  const linkedInText = `Check out this AI-generated music: "${song.title}" - Created with YuE2 Studio. #AIMusic #MusicTech #OpenSource`;
+  const defaultShareText = `🎵 "${song.title}" ${song.style ? `(${song.style})` : ''} - Made with Ai Music Studio`;
+  const twitterText = `🔥 Just created "${song.title}" with Ai Music Studio! ${song.style ? `#${song.style.replace(/\s+/g, '')}` : ''} #AIMusic #YuE2`;
+  const redditTitle = `[AI Music] ${song.title} - ${song.style || 'Original'} | Created with Ai Music Studio`;
+  const whatsAppText = `🎧 Listen to this AI-generated song!\n\n"${song.title}" by ${song.creator || 'Unknown Artist'}\n${song.style ? `Genre: ${song.style}` : ''}\n\nMade with Ai Music Studio.`;
+  const telegramText = `🎵 "${song.title}" by ${song.creator || 'Unknown Artist'}\n${song.style ? `🎸 ${song.style}` : ''}\n\n🤖 Made with Ai Music Studio`;
+  const linkedInText = `Check out this AI-generated music: "${song.title}" - Created with Ai Music Studio. #AIMusic #MusicTech #OpenSource`;
 
   const handleShareX = () => {
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterText)}&url=${encodeURIComponent(shareUrl)}`;

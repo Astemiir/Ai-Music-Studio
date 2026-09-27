@@ -117,7 +117,7 @@ export const ru = {
     settings: 'Настройки',
 
     // Username Modal
-    welcomeTitle: 'Добро пожаловать в MiniMax Music3 Studio',
+    welcomeTitle: 'Добро пожаловать в Ai Music Studio',
     welcomeSubtitle: 'Введите ваше имя, чтобы начать создавать AI-музыку',
     yourName: 'Ваше имя',
     enterYourName: 'Введите ваше имя',
@@ -369,7 +369,7 @@ export const ru = {
     failedToDeleteSong: 'Не удалось удалить песню',
 
     // Sidebar
-    aceStepUI: 'MiniMax Music3 Studio',
+    aceStepUI: 'Ai Music Studio',
     collapseSidebar: 'Свернуть боковую панель',
     expandSidebar: 'Развернуть боковую панель',
     monitoring: 'Мониторинг',
@@ -869,7 +869,7 @@ export const ru = {
     shareViaEmail: 'Отправить по email',
     copyLink: 'Копировать ссылку',
     emailSubject: 'Послушай эту AI-песню',
-    emailBody: 'Привет!\n\nЯ создал эту AI-песню и подумал, что тебе понравится:\n\n\"{title}\" - {creator}\n{style}\n\nПослушай здесь: {url}\n\nСоздано в MiniMax Music3 Studio.',
+    emailBody: 'Привет!\n\nЯ создал эту AI-песню и подумал, что тебе понравится:\n\n\"{title}\" - {creator}\n{style}\n\nПослушай здесь: {url}\n\nСоздано в Ai Music Studio.',
 
     // Reference Modal
     referenceModalTitle: 'Референс',
@@ -1273,7 +1273,7 @@ export const ru = {
     dockMonitor: 'Вернуть монитор ресурсов',
     firstRun: 'Первый запуск',
     studioOfflineTitle: 'Студия не запущена',
-    studioOfflineBody: 'Окно открыто, но служба студии не отвечает: приложение закрыто или остановилось. Запустите MiniMax Music3 Studio снова — страница вернётся сама.',
+    studioOfflineBody: 'Окно открыто, но служба студии не отвечает: приложение закрыто или остановилось. Запустите Ai Music Studio снова — страница вернётся сама.',
     studioOfflineRetrying: 'Пробую переподключиться',
     studioOfflineRetry: 'Проверить сейчас',
     resourcesTitle: 'Модели и кванты',
@@ -1338,6 +1338,10 @@ export const ru = {
     engineUnavailable: 'Локальный движок недоступен',
     engineReachable: 'Движок Music3 доступен',
     engineStarting: 'Движок Music3 запускается',
+    engineChoice: 'Движок',
+    engineYue2: 'YuE2',
+    engineMusic3: 'Music 3',
+    engineSwitching: 'Переключаю движок…',
     profileReady: 'Профиль готов',
     profileNotInstalled: 'Профиль модели не установлен',
     noProfile: 'Нет профиля',
@@ -1479,7 +1483,7 @@ export const ru = {
     assistantOwnFile: 'Или GGUF, который уже есть на этом компьютере',
     assistantOwnFileHint: 'Полный путь к текстовому GGUF, который у вас уже есть. Он берётся как есть — ничего не качается и не копируется.',
     serviceUnavailable: 'Служба студии не отвечает',
-    serviceUnavailableHint: 'Локальная служба не запущена. Перезапустите MiniMax Music3 Studio — библиотека при этом не теряется.',
+    serviceUnavailableHint: 'Локальная служба не запущена. Перезапустите Ai Music Studio — библиотека при этом не теряется.',
     karaokeSection: 'Тайминги караоке',
     karaokeHint: 'Текст самой песни ставится на тайминги распознавателя — чтобы генератор видео и плеер вели строку. По умолчанию выключено, ничего не качается без вашей команды.',
     karaokeEnable: 'Расставлять тайминги автоматически',

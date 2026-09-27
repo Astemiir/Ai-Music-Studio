@@ -116,7 +116,7 @@ export const zh = {
     settings: '设置',
 
     // Username Modal
-    welcomeTitle: '欢迎使用 MiniMax Music3 Studio',
+    welcomeTitle: '欢迎使用 Ai Music Studio',
     welcomeSubtitle: '输入您的名字开始创作 AI 音乐',
     yourName: '您的名字',
     enterYourName: '请输入您的名字',
@@ -365,7 +365,7 @@ export const zh = {
     failedToDeleteSong: '删除歌曲失败',
 
     // Sidebar
-    aceStepUI: 'MiniMax Music3 Studio',
+    aceStepUI: 'Ai Music Studio',
     collapseSidebar: '收起侧边栏',
     expandSidebar: '展开侧边栏',
     monitoring: '监控',
@@ -865,7 +865,7 @@ export const zh = {
     shareViaEmail: '通过邮件分享',
     copyLink: '复制链接',
     emailSubject: '来听听这首AI歌曲',
-    emailBody: '嘿！\n\n我创作了这首AI生成的歌曲，觉得你会喜欢：\n\n《{title}》- {creator}\n{style}\n\n点击收听：{url}\n\n使用 MiniMax Music3 Studio 制作。',
+    emailBody: '嘿！\n\n我创作了这首AI生成的歌曲，觉得你会喜欢：\n\n《{title}》- {creator}\n{style}\n\n点击收听：{url}\n\n使用 Ai Music Studio 制作。',
 
     // Reference Modal
     referenceModalTitle: '参考音频',
@@ -1269,7 +1269,7 @@ export const zh = {
     dockMonitor: '停靠资源监视器',
     firstRun: '首次运行',
     studioOfflineTitle: '工作室未运行',
-    studioOfflineBody: '窗口已打开，但工作室服务没有响应：应用已关闭或已停止。重新启动 MiniMax Music3 Studio，本页会自动恢复。',
+    studioOfflineBody: '窗口已打开，但工作室服务没有响应：应用已关闭或已停止。重新启动 Ai Music Studio，本页会自动恢复。',
     studioOfflineRetrying: '正在尝试重新连接',
     studioOfflineRetry: '立即检查',
     resourcesTitle: '模型与量化',
@@ -1334,6 +1334,10 @@ export const zh = {
     engineUnavailable: '本地运行时不可用',
     engineReachable: 'Music3 引擎可用',
     engineStarting: 'Music3 引擎启动中',
+    engineChoice: '引擎',
+    engineYue2: 'YuE2',
+    engineMusic3: 'Music 3',
+    engineSwitching: '正在切换引擎…',
     profileReady: '配置就绪',
     profileNotInstalled: '未安装模型配置',
     noProfile: '无配置',
@@ -1475,7 +1479,7 @@ export const zh = {
     assistantOwnFile: '或使用本机已有的 GGUF',
     assistantOwnFileHint: '已有文本 GGUF 的完整路径。直接使用，不下载、不复制。',
     serviceUnavailable: '工作室服务无响应',
-    serviceUnavailableHint: '本地服务未运行。请重启 MiniMax Music3 Studio，曲库不会丢失。',
+    serviceUnavailableHint: '本地服务未运行。请重启 Ai Music Studio，曲库不会丢失。',
     karaokeSection: '卡拉OK 时间轴',
     karaokeHint: '把歌曲自身的歌词放到识别器的时间轴上，视频工作室与播放器即可逐行跟随。默认关闭，未经许可不下载任何内容。',
     karaokeEnable: '为新曲目自动生成时间轴',

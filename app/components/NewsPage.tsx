@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Newspaper, X, Star, Github, FileText } from 'lucide-react';
 import { useI18n } from '../context/I18nContext';
 import newsData from '../data/news.json';
+import newsMusic3 from '../data/news-mm3.json';
 import changelogData from '../data/changelog.json';
+import changelogMusic3 from '../data/changelog-mm3.json';
 
 type TabId = 'news' | 'changelog';
 
@@ -130,12 +132,13 @@ function sectionBadgeColor(title: string): string {
 // ── Changelog Tab ────────────────────────────────────────────────────
 
 const ChangelogTab: React.FC = () => {
-  const { t } = useI18n();
+  const { t, engine } = useI18n();
 
   // Written by scripts/changelog.mjs straight from the repository history, so
   // this page cannot drift from what was actually shipped. It used to fetch
-  // /api/changelog from a backend this fork does not have.
-  const days = changelogData as Array<{ date: string; items: Array<{ hash: string; subject: string; body: string }> }>;
+  // /api/changelog from a backend this fork does not have. The history is the
+  // one of the studio whose engine is answering: the two were built apart.
+  const days = (engine === 'mm3' ? changelogMusic3 : changelogData) as Array<{ date: string; items: Array<{ hash: string; subject: string; body: string }> }>;
 
   if (days.length === 0) {
     return (
@@ -181,8 +184,13 @@ const ChangelogTab: React.FC = () => {
 };
 
 export const NewsPage: React.FC = () => {
-  const { t, language } = useI18n();
+  const { t, language, engine } = useI18n();
   const [activeTab, setActiveTab] = useState<TabId>('news');
+  // The studio whose engine answers: its news, its history and its repository.
+  const music3 = engine === 'mm3';
+  const repository = music3
+    ? { slug: 'timoncool/MiniMax-Music3-Studio', url: 'https://github.com/timoncool/MiniMax-Music3-Studio' }
+    : { slug: 'timoncool/YuE2-Studio', url: 'https://github.com/timoncool/YuE2-Studio' };
 
   const localize = (value: LocalizedString): string => {
     if (typeof value === 'string') return value;
@@ -198,7 +206,7 @@ export const NewsPage: React.FC = () => {
     }
   });
 
-  const allNews = newsData as NewsItem[];
+  const allNews = (music3 ? newsMusic3 : newsData) as NewsItem[];
   const activeNews = allNews.filter(n => !dismissedNews.has(n.id));
   const dismissed = allNews.filter(n => dismissedNews.has(n.id));
 
@@ -346,14 +354,14 @@ export const NewsPage: React.FC = () => {
 
         {/* Star Repo */}
         <a
-          href="https://github.com/timoncool/YuE2-Studio"
+          href={repository.url}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3 mb-6 px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-suno-card hover:border-zinc-300 dark:hover:border-white/10 transition-all group"
         >
           <Github size={20} className="text-zinc-500 dark:text-zinc-400 flex-shrink-0" />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">timoncool/YuE2-Studio</p>
+            <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{repository.slug}</p>
             <p className="text-xs text-zinc-500 dark:text-zinc-400">{t('starRepo')}</p>
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-white/10 text-zinc-700 dark:text-zinc-300 text-sm font-medium group-hover:bg-amber-500/15 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors flex-shrink-0">

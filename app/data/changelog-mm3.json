@@ -1,0 +1,1393 @@
+[
+  {
+    "date": "2026-09-26",
+    "items": [
+      {
+        "hash": "04ac1a3",
+        "date": "2026-09-26",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "42491aa",
+        "date": "2026-09-26",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "f9882c3",
+        "date": "2026-09-26",
+        "subject": "Cargo.lock of the desktop shell after the 2.1.2 build",
+        "body": ""
+      },
+      {
+        "hash": "3a5649a",
+        "date": "2026-09-26",
+        "subject": "Release script: the portable folder is built afresh, not over the last one",
+        "body": ""
+      },
+      {
+        "hash": "5a4ffb8",
+        "date": "2026-09-26",
+        "subject": "An update installs over the studio it came from; temporary files and the WebView2 profile stay beside an installed studio; WebView2 arguments reach the window",
+        "body": ""
+      },
+      {
+        "hash": "4fb9278",
+        "date": "2026-09-26",
+        "subject": "2.1.2: what an agent makes appears at once, deleting a song removes its files, titles, song counts, download progress",
+        "body": ""
+      },
+      {
+        "hash": "48fc782",
+        "date": "2026-09-26",
+        "subject": "Deleting a song removes its files: the library's resolved paths and the media folder were compared as written, so every file was kept",
+        "body": ""
+      },
+      {
+        "hash": "3f015ee",
+        "date": "2026-09-26",
+        "subject": "A song with a LoRA is not named after the LoRA's trigger word",
+        "body": ""
+      },
+      {
+        "hash": "d6c64fe",
+        "date": "2026-09-26",
+        "subject": "Review: a rescan stops waiting for songs on an engine that no longer answers",
+        "body": ""
+      },
+      {
+        "hash": "d050c35",
+        "date": "2026-09-26",
+        "subject": "Review: a rescan leaves the engine off while a training run or a dataset preparation holds the card; a failed reload after it shows its error",
+        "body": ""
+      },
+      {
+        "hash": "c3ab376",
+        "date": "2026-09-26",
+        "subject": "A track with a prose description is named after what the description is about, and so is its genre tag",
+        "body": ""
+      },
+      {
+        "hash": "f305228",
+        "date": "2026-09-26",
+        "subject": "The engine finds models that arrive after it started: a finished download restarts it once the songs on it are done, and a button in Settings - Models and on the LoRA page (and the resources_rescan tool) does the same for files put in the folders by hand",
+        "body": ""
+      },
+      {
+        "hash": "d6d289e",
+        "date": "2026-09-26",
+        "subject": "What an agent changes reaches the window: the service tells every window when an agent's call changes something and when a LoRA download it started finishes, and the window reads its songs, jobs, LoRA and settings again; jobs are adopted on that notice instead of on a timer",
+        "body": ""
+      },
+      {
+        "hash": "4eac32d",
+        "date": "2026-09-26",
+        "subject": "A model download counts only what comes down, not the files of the set already on disk",
+        "body": ""
+      },
+      {
+        "hash": "6621905",
+        "date": "2026-09-26",
+        "subject": "Song counts take the form each language asks for: 2 песни, 13 песен, 21 песня",
+        "body": ""
+      },
+      {
+        "hash": "7bedf39",
+        "date": "2026-09-26",
+        "subject": "Songs an agent starts over MCP get their card and land in the library without a reload: the window marks its own requests and the service hands the mark back on the job, so it adopts every other running job by id",
+        "body": ""
+      },
+      {
+        "hash": "ed20a4b",
+        "date": "2026-09-26",
+        "subject": "The safetensors header is parsed apart from the HTTP reads and tested",
+        "body": ""
+      },
+      {
+        "hash": "06c6059",
+        "date": "2026-09-26",
+        "subject": "Choosing a local assistant server no longer undoes itself: the saved choice is read once, and the switch is stored with the server's address",
+        "body": ""
+      },
+      {
+        "hash": "1501c37",
+        "date": "2026-09-26",
+        "subject": "A whole small adapter file answered with 200 is read as its header",
+        "body": ""
+      },
+      {
+        "hash": "32a0f15",
+        "date": "2026-09-26",
+        "subject": "Adapter header read only from a ranged answer, never a whole weight file",
+        "body": ""
+      },
+      {
+        "hash": "605842f",
+        "date": "2026-09-26",
+        "subject": "Adapter header from one range read of the file's start; a second only for a longer header",
+        "body": ""
+      },
+      {
+        "hash": "d82db64",
+        "date": "2026-09-26",
+        "subject": "Shared adapter library: catalogue search and size filter, Hugging Face files checked before download",
+        "body": "The adapter library now matches ACE-Step Studio's, the shared version in\nmusic-studio-core:\n- Hugging Face results show downloads beside likes, and can also search\n  repository names (the catalogue's hub.search words).\n- A repository's files are checked by their safetensors header before\n  download: the format (LoRA, LoKr) and why the engine cannot merge a file\n  (LoHa, DoRA), read in music-core's adapter_weights.\n- The catalogue can be searched and, for a model that comes in several sizes,\n  filtered by size; an adapter of the other size is marked.\n- music_engine::model is where a model plugs in: its adapter slots, its sizes,\n  and what an adapter file is for its engine."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-25",
+    "items": [
+      {
+        "hash": "0fe9ad8",
+        "date": "2026-09-25",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "ce12dfa",
+        "date": "2026-09-25",
+        "subject": "2.1.1 without a news entry",
+        "body": ""
+      },
+      {
+        "hash": "98df4a5",
+        "date": "2026-09-25",
+        "subject": "2.1.1: one song menu everywhere, Create video on track rows and in the song details",
+        "body": ""
+      },
+      {
+        "hash": "73eb42f",
+        "date": "2026-09-25",
+        "subject": "Drop the menu props nothing reads any more; the song menu opens upward or scrolls into view near a panel's edge",
+        "body": ""
+      },
+      {
+        "hash": "b89a884",
+        "date": "2026-09-25",
+        "subject": "One song menu everywhere: actions come from a shared context",
+        "body": "The library page, the song details and the player built the song menu with their own subsets of actions, so Create video, re-render and others were missing outside the create page list. The menu now takes its actions from SongActionsContext provided by the app and stems from the shared service, and every place renders it the same way. Create video is also a button on the track row and in the song details."
+      },
+      {
+        "hash": "af94b5b",
+        "date": "2026-09-25",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "ed9849c",
+        "date": "2026-09-25",
+        "subject": "2.1.0: train a LoRA further, section tags for your own lyrics, fixes from your comments",
+        "body": ""
+      },
+      {
+        "hash": "7205a48",
+        "date": "2026-09-25",
+        "subject": "Train a finished run further, tag your own lyrics, fixes from Habr comments",
+        "body": "- Train further: a LoRA-method run goes on from the state the trainer keeps on a clean finish (resume-state.bin), same recipe and songs, checkpoints and loss chart continue. PiSSA and HOT-PiZZA runs are refused with the trainer's reason. Route /v1/training/runs/{id}/continue, MCP training_continue, resume_step/resume_refused in training status.\n- Section tags for lyrics from the form without changing a word, route /v1/assistant/sections, MCP assistant_sections; only a time prefix is taken off a line.\n- Library songs carry the local owner, so rename, cover and delete work from the details and the player; a pencil on library rows.\n- Use models I already have searches subfolders, off the async thread.\n- Side panels up to 1200 px within 40% of the window, keyboard and double-click reset.\n- A LoRA trigger put into an empty Global Metadata keeps its comma, so typed text stays apart."
+      },
+      {
+        "hash": "2778516",
+        "date": "2026-09-25",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "e706deb",
+        "date": "2026-09-25",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "d51596f",
+        "date": "2026-09-25",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "0a688e9",
+        "date": "2026-09-25",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "0a25c63",
+        "date": "2026-09-25",
+        "subject": "Project page and README: screenshots of LoRA, training, MIDI, processing, agent and derived tracks in five languages",
+        "body": ""
+      },
+      {
+        "hash": "4a814d9",
+        "date": "2026-09-25",
+        "subject": "2.0.0: the studio driven by an agent over MCP, any track to MIDI, tracks made by tools in the library",
+        "body": ""
+      },
+      {
+        "hash": "c46e625",
+        "date": "2026-09-25",
+        "subject": "MCP names the studio's own version; the transcriber says which card and driver it needs when CUDA 13 is missing; unused song versions code removed",
+        "body": ""
+      },
+      {
+        "hash": "0ca0418",
+        "date": "2026-09-25",
+        "subject": "Audio to MIDI: HOT-Step's MuScriptor port as a tool for any track - fetched on first use, live piano roll, MCP tools; band-limited resampling for every 16 kHz reader",
+        "body": ""
+      },
+      {
+        "hash": "e10cb6e",
+        "date": "2026-09-25",
+        "subject": "A LoRA named without strengths starts where the create page starts it: its own, else full on every slot it touches",
+        "body": ""
+      },
+      {
+        "hash": "a26ed56",
+        "date": "2026-09-25",
+        "subject": "A song delete names the files it could not remove; Whisper's processor fallback runs only for what is left; track-number regex built once",
+        "body": ""
+      },
+      {
+        "hash": "551b5c7",
+        "date": "2026-09-25",
+        "subject": "Window commands check what they are given: video_set refuses unknown fields and ratios, create_set unknown choices; a render cannot leave the agent's target behind; original looked up once",
+        "body": ""
+      },
+      {
+        "hash": "dc65aa8",
+        "date": "2026-09-25",
+        "subject": "Stems reach the library before the old ones go, off the runtime; kept processing named by its label",
+        "body": ""
+      },
+      {
+        "hash": "88ad40b",
+        "date": "2026-09-25",
+        "subject": "MCP: studio_wait waits for stems, processing, covers and karaoke; refuses an unknown job; one folder walker; tool files read off the runtime; truer annotations",
+        "body": ""
+      },
+      {
+        "hash": "4c6468d",
+        "date": "2026-09-25",
+        "subject": "MCP checklist fixes: waits under a minute, compact songs and recogniser settings, grouped page, covers linked",
+        "body": "A wait answers within 55 s, under the minute clients give a tool call, and\nsays to call again. Every answer that is a library song leaves out its\naudio codes, score, duplicated lyrics and karaoke timings unless asked for\ndetailed; the recogniser settings list the models to choose, not every\nfile. The page reading gives one line per song row with its buttons. A\ncover names the library song its melody came from (cover_of, from the\ncover page or an agent), video_get reports the clip's length once the audio\nis loaded, the tool list is fresh for five minutes, and the skill says the\nvideo editor needs a visible window."
+      },
+      {
+        "hash": "cf1d019",
+        "date": "2026-09-25",
+        "subject": "MCP: short answers an agent acts on, models_adopt, song_defaults, plain paths",
+        "body": "A song job answers with its status and the songs it made instead of the\nrequest's lyrics, score and audio codes; a library song leaves its audio\ncodes out; lora_list gives one line per LoRA in English; studio_wait and\nstudio_status speak of jobs the same way. response_format detailed gives\neverything. A just-installed LoRA says its slots are not known yet instead\nof an empty list. Adopting model files takes a folder path, so an agent\ncan do it without the folder dialog, and song_defaults tells what a field\nleft out becomes. File paths come without the \\\\?\\ prefix, and cover_prompt\nsays it needs an image model set up."
+      },
+      {
+        "hash": "88a0978",
+        "date": "2026-09-25",
+        "subject": "MCP on the 2026-07-28 revision; the agent as the studio's assistant; tracks made by tools are tracks of the library",
+        "body": "The server speaks the stateless revision (server/discover, per-request\n_meta, Mcp-Method/Mcp-Name checked against the body, cacheable lists,\nstructured results, portable schemas) and the handshake revisions for\nolder clients. Picking \"Agent (MCP)\" as the writing assistant sends what\nthe studio would ask its local model to the connected agent; Settings has\nan Agent page with the connection state and what to paste. The agent reads\nand fills the create page's form, sees each control with its label and\nthe song it belongs to, plays a single stem, shows the user a message and\nreads the window's console. Every song_create field is in its schema."
+      },
+      {
+        "hash": "2f74289",
+        "date": "2026-09-25",
+        "subject": "MCP: local origins only, one window per command, streamed uploads",
+        "body": "The MCP endpoint and the window bridge refuse a foreign Origin, so a web\npage cannot make the studio read files by path. A command goes to the\nnewest window only, not to every open one. Tools that install, import or\nrefresh are no longer annotated read-only. Files an agent names are sent\nto the route a megabyte at a time instead of whole in memory, and a clip\nof a long song fits the videos route. A failed render reports its reason\nin video_get instead of an alert, and writer: agent refuses to train\nbefore the agent has written the songs."
+      },
+      {
+        "hash": "9cc16a2",
+        "date": "2026-09-25",
+        "subject": "Site: the agent over MCP",
+        "body": ""
+      },
+      {
+        "hash": "38af2f2",
+        "date": "2026-09-25",
+        "subject": "An MCP server in the studio",
+        "body": "Every route of the studio's API is a tool called inside the process, named\nby area (song_, library_, dataset_, training_, lora_...), annotated, with\nlarge answers cut to what an agent acts on and studio_wait instead of\npolling. The window answers through a bridge: a screenshot, its controls,\nclicks and typing, the pages, the player and the video editor, whose clip\nan agent's render saves in the studio's folder. MiniMax's caption rules and\nreference captions are tools, resources and prompts, and a preparation can\nleave the lyric layout to the agent (writer: agent)."
+      },
+      {
+        "hash": "d076e14",
+        "date": "2026-09-25",
+        "subject": "Training guide names the Find again button as the page does",
+        "body": ""
+      },
+      {
+        "hash": "d7a7c50",
+        "date": "2026-09-25",
+        "subject": "Stop choices short enough to fit their field",
+        "body": ""
+      },
+      {
+        "hash": "dacca21",
+        "date": "2026-09-25",
+        "subject": "Training page: song counts in each language's plural form, and a reason on the per-song buttons while they wait",
+        "body": ""
+      },
+      {
+        "hash": "16d31a2",
+        "date": "2026-09-25",
+        "subject": "A song keeps the path it was dropped with as its source",
+        "body": "The folders a song came from name its artist when its tags do not; the\nsource kept only the file name, so that was lost once the upload was done."
+      },
+      {
+        "hash": "ba846cc",
+        "date": "2026-09-25",
+        "subject": "Changelog: what is unreleased",
+        "body": ""
+      },
+      {
+        "hash": "109b2ab",
+        "date": "2026-09-25",
+        "subject": "Training guide: the real preparation order, resume after a restart, per-song retry, trigger from the name, stop by epochs",
+        "body": ""
+      },
+      {
+        "hash": "ac9d52f",
+        "date": "2026-09-25",
+        "subject": "A caption written by the assistant marks the song's style done",
+        "body": "The describe route stored the caption but left the song's style state\nwanted, so the song still showed as lacking a style."
+      },
+      {
+        "hash": "951c216",
+        "date": "2026-09-25",
+        "subject": "Guide timings measured; repeated lines marked for the section model",
+        "body": "The guide gives what MOSS was measured to take on an RTX 4090 (about 12 GB,\n6-7 s a song). The numbered sheet the assistant sections marks each line\nsung more than once with its count, so a small model sees the chorus."
+      },
+      {
+        "hash": "048dada",
+        "date": "2026-09-25",
+        "subject": "Project pages: dataset preparation and describing by ear",
+        "body": "A card for the one-drop dataset preparation, a requirements row for\nMOSS-Music, and no song-count limit on the own-LoRA card, in every language."
+      },
+      {
+        "hash": "b8dd2e4",
+        "date": "2026-09-25",
+        "subject": "Second review pass on dataset preparation",
+        "body": "A batch Whisper run the card refuses goes on on the processor with only the\nsongs still unheard, and the page says so. A title starting with a number\nkeeps it unless the number is a zero-padded or three-digit track number.\nLyrics lookup compiles its patterns once, and a short title no longer\nmatches a longer one that merely contains it."
+      },
+      {
+        "hash": "5298909",
+        "date": "2026-09-25",
+        "subject": "Review fixes for the preparation job",
+        "body": "A song deleted mid-job fails alone instead of stopping the job; the job\nfile is written before the job is marked running; a listen callback no\nlonger waits forever when the tempo measurer dies; an unreadable dataset\nis reported instead of leaving a stale queue. Triggers made from names in\nother scripts carry a hash, and a trigger the user cleared stays cleared.\nThe dataset card and the train step count readiness by song state."
+      },
+      {
+        "hash": "7c73402",
+        "date": "2026-09-25",
+        "subject": "Dataset preparation as a resumable server job",
+        "body": "Lyrics come from LRCLIB, QQ Music and Kugou first; only songs none of them\nknows are separated and heard by Whisper, with hallucinations filtered. Each\nsong keeps its lyrics and style state in dataset.json, the job is kept on\ndisk and picked up after a restart, and a failed song can be finished alone.\nA published sheet is laid out by section boundaries, so its words stay exact;\nthe assistant schema is sent where llama-server reads it. MOSS listens with\nthe tempo (and in MiniMax the key) measured on the card, models load one at a\ntime and once per batch, and the engine watcher leaves a busy card alone.\nThe wizard shows every stage live; datasets get a trigger word from their\nname; README lists every model with its link and folder."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-24",
+    "items": [
+      {
+        "hash": "76387cc",
+        "date": "2026-09-24",
+        "subject": "Training guide: a window that stays over the page, dragged and resized, with the workflow, what to write, what the studio does and does not do, the run settings and a checklist",
+        "body": ""
+      },
+      {
+        "hash": "b76fd39",
+        "date": "2026-09-24",
+        "subject": "Auto skips Vulkan beside an NVIDIA card; an engine that dies without a word counts as a lost device",
+        "body": "The DiT on Vulkan hung an RTX 4090 until Windows reset its driver (three\nnvlddmkm resets, with and without flash attention), and the engine left\nnothing in its log, so the chain would have restarted it on Vulkan again.\nAuto now goes CUDA then the processor on NVIDIA, and a silent death under\nAuto moves down the chain. The Vulkan hint says NVIDIA should use CUDA."
+      },
+      {
+        "hash": "71c3d1a",
+        "date": "2026-09-24",
+        "subject": "Engine at minimaxmusic.cpp 8e6d54f: the device is chosen and tested before the engine listens",
+        "body": ""
+      },
+      {
+        "hash": "9321745",
+        "date": "2026-09-24",
+        "subject": "Auto walks CUDA, Vulkan, the processor: a device that fails is left for the session",
+        "body": "The engine now tests the device it chose before it takes work. Under\nAuto the studio starts it on CUDA, then Vulkan, then the processor,\nmoving on when a start fails or the engine dies with a CUDA or Vulkan\nerror, never on running out of memory. A device chosen in Settings is\nthe only one tried. Engine at minimaxmusic.cpp 8b36200."
+      },
+      {
+        "hash": "8c52be4",
+        "date": "2026-09-24",
+        "subject": "Vulkan and a compute device setting: Auto, CUDA, Vulkan or the processor",
+        "body": "The engine is built with Vulkan beside the two CUDA backends, so AMD and\nIntel cards and NVIDIA cards neither CUDA build runs have a GPU path.\nOff CUDA the engine's FP16 clamp is on, as in YuE2 Studio."
+      },
+      {
+        "hash": "4e15008",
+        "date": "2026-09-24",
+        "subject": "1.6.2: every NVIDIA card from the GTX 900 series, two CUDA builds with device code; engine at minimaxmusic.cpp 120a4f6",
+        "body": ""
+      },
+      {
+        "hash": "8f88d69",
+        "date": "2026-09-24",
+        "subject": "Ship cudart64_12.dll beside the engine for the CUDA 12 backend",
+        "body": ""
+      },
+      {
+        "hash": "7a1b035",
+        "date": "2026-09-24",
+        "subject": "Build the CUDA 12 backend with the MSVC 14.4x toolset nvcc 12.9 knows",
+        "body": ""
+      },
+      {
+        "hash": "2ca84f4",
+        "date": "2026-09-24",
+        "subject": "Run on every NVIDIA card from the GTX 900 series: two CUDA builds, device code only",
+        "body": "The engine now loads its backends at run time and ships a CUDA 13 and a\nCUDA 12.9 ggml-cuda, each in its own folder; the studio reads the\ncompute capability and the driver from nvidia-smi and names the one\nthey run, fetching that build's cuBLAS. Every architecture gets device\ncode, so an older driver no longer fails on PTX it cannot compile.\nCards before Ampere get the engine's FP16 clamp."
+      },
+      {
+        "hash": "ab30140",
+        "date": "2026-09-24",
+        "subject": "chore: update star history chart",
+        "body": ""
+      },
+      {
+        "hash": "c18ff18",
+        "date": "2026-09-24",
+        "subject": "Star history redraws on every new star",
+        "body": ""
+      },
+      {
+        "hash": "c835a7b",
+        "date": "2026-09-24",
+        "subject": "The create page keeps what was typed in it when another page opens",
+        "body": ""
+      },
+      {
+        "hash": "035da23",
+        "date": "2026-09-24",
+        "subject": "Engine builds reuse one checkout, so a new pinned commit recompiles only what it changed; header edits are tracked under a localised Visual Studio",
+        "body": ""
+      },
+      {
+        "hash": "4c804ff",
+        "date": "2026-09-24",
+        "subject": "1.6.1: songs found after the folder moves, errors with their cause, select all in the LoRA catalogue; engine at minimaxmusic.cpp 0072f72",
+        "body": ""
+      },
+      {
+        "hash": "3ad39c8",
+        "date": "2026-09-24",
+        "subject": "LoRA catalogue: select everything not downloaded yet in one click",
+        "body": ""
+      },
+      {
+        "hash": "693023e",
+        "date": "2026-09-24",
+        "subject": "Errors of separation, karaoke and covers carry their cause; a card that cannot load the stem model says to switch to the processor",
+        "body": ""
+      },
+      {
+        "hash": "47f0e8f",
+        "date": "2026-09-24",
+        "subject": "Library: songs play after the studio folder moves; stored paths resolve by name in the media folder",
+        "body": ""
+      },
+      {
+        "hash": "498d620",
+        "date": "2026-09-24",
+        "subject": "Desktop lockfile with the processing and training crates",
+        "body": ""
+      },
+      {
+        "hash": "0c19794",
+        "date": "2026-09-24",
+        "subject": "Engine at minimaxmusic.cpp 12534e3: its tests build with the adapter loader",
+        "body": ""
+      },
+      {
+        "hash": "7740f60",
+        "date": "2026-09-24",
+        "subject": "Changelog: broken engine output fails the song",
+        "body": ""
+      },
+      {
+        "hash": "b7255cd",
+        "date": "2026-09-24",
+        "subject": "1.6.0: LoRA with training, audio processing with VST3, MP3 by LAME, the Light and Minimal sets load again",
+        "body": ""
+      },
+      {
+        "hash": "6420015",
+        "date": "2026-09-24",
+        "subject": "Engine at minimaxmusic.cpp 5922db4: the Light and Minimal sets load, LoRA merges into K-quant weights; broken engine samples fail the song instead of saving silence",
+        "body": ""
+      },
+      {
+        "hash": "3d2e5ce",
+        "date": "2026-09-24",
+        "subject": "Lyrics autofill says why it failed and counts only the songs it recognises; training waits for it",
+        "body": ""
+      },
+      {
+        "hash": "055b052",
+        "date": "2026-09-24",
+        "subject": "Trainer pack shows the real size of the released archive",
+        "body": ""
+      },
+      {
+        "hash": "e21b179",
+        "date": "2026-09-24",
+        "subject": "Review fixes: imported songs take fresh ids, a dataset in training cannot be changed, recipe numbers can be typed, one download set at a time, processing names what it ran and shows load errors",
+        "body": ""
+      },
+      {
+        "hash": "23f69a8",
+        "date": "2026-09-24",
+        "subject": "Review fixes: VST loads only scanned plugins and refuses unsaved settings; imports stream to disk and validate before writing; run and dataset edits never overwrite each other; training leases the card; a rename keeps processed versions",
+        "body": ""
+      },
+      {
+        "hash": "8f73b4a",
+        "date": "2026-09-24",
+        "subject": "README and project page: LoRA, training, audio processing, VST3",
+        "body": ""
+      },
+      {
+        "hash": "db14ea3",
+        "date": "2026-09-24",
+        "subject": "Training strings: seed and loss in Russian",
+        "body": ""
+      },
+      {
+        "hash": "404ea62",
+        "date": "2026-09-24",
+        "subject": "Releases ship the VST host; the trainer and the host at HOT-Step fork 8a5e42c4",
+        "body": "build-vst-host.ps1 builds vst-host at the trainer's pinned commit, without\nCUDA, and the release stages it under resources/vst-host for the installer\nand the portable build. 8a5e42c4 keeps a chain entry with no saved state\nfrom crashing the host."
+      },
+      {
+        "hash": "6cd481e",
+        "date": "2026-09-24",
+        "subject": "Processing: a chain of the user's own VST3 plugins, before mastering",
+        "body": "HOT-Step's vst-host runs beside the studio as its own process, so a plugin\nthat crashes takes the host down and not the studio. It finds the plugins in\nthe system's VST3 folders, opens a plugin's own window to set it up - the\nsettings saved into a state file per chain slot - and runs a track through\nthe enabled plugins at its own rate. The processing window gains the chain;\na kept version's name lists the plugins."
+      },
+      {
+        "hash": "8dcb0b4",
+        "date": "2026-09-24",
+        "subject": "Training exports HOT-PiZZA as plain LoRA; the window fits a 24 GB card with room",
+        "body": "The recipe asks the trainer (43fd0732) for standalone PiSSA exports - a\nplain rank-2r LoRA the engine merges - where the default wrote deltas tied\nto a residual file, and holds the frozen factors in F16. The first run on a\n24 GB card left 0.5 GB free at a 2048 frame window; the default is now 1536."
+      },
+      {
+        "hash": "585a919",
+        "date": "2026-09-24",
+        "subject": "Tools page: the processing window opens on the track chosen there",
+        "body": ""
+      },
+      {
+        "hash": "29590d3",
+        "date": "2026-09-24",
+        "subject": "Datasets import from other studios; captions written by the assistant",
+        "body": "A dataset folder from YuE2 Studio imports as it stands, and a dataset's\nfolder opens to be carried the other way. Each song's structured caption -\nGlobal Metadata, Vocal Details, Arrangement - can be written by the writing\nassistant from its style line and lyrics, retried once when a section comes\nback empty; the answer is capped at 2048 tokens (a transcript at 4096) so a\nlooping model fails fast. Uploads to a dataset may weigh up to 16 GB. The\nengine moves to minimaxmusic.cpp 7fca80a, which honours rsLoRA."
+      },
+      {
+        "hash": "62c9757",
+        "date": "2026-09-24",
+        "subject": "LoRA page and training on MiniMax Music 3",
+        "body": "The LoRA page comes over from YuE2 Studio: installed adapters, the catalogue,\nHugging Face search and imports, and a picker in the create form that puts a\nLoRA's trigger word into the Global Metadata and brings a song's LoRA back\nwhen it is reused. Song details show the parameters this engine records."
+      },
+      {
+        "hash": "ebee382",
+        "date": "2026-09-24",
+        "subject": "LoRA on the server: the engine loads the studio's adapters into the LM and the DiT",
+        "body": "The engine moves to the timoncool/minimaxmusic.cpp fork, which merges LoRA\nand LoKr adapters into the planner LM and the flow DiT at load and shifts a\nshort schedule to keep its sound. The studio starts it with its adapter\nfolder, and a request names installed adapters with a strength for the\ncomposition (the LM) and the sound (the DiT)."
+      },
+      {
+        "hash": "9336952",
+        "date": "2026-09-24",
+        "subject": "Audio processing, and MP3 made by the studio with LAME",
+        "body": "Processing comes over from YuE2 Studio as it now stands: noise reduction,\nSpectral Lifter, the vocal naturalizer and mastering to a reference, run into\na preview that is kept as a version beside the original or thrown away. Runs\nare claimed atomically and clean up after themselves."
+      },
+      {
+        "hash": "1eb85bc",
+        "date": "2026-09-24",
+        "subject": "Build the engine with Ninja, so it does not need the CUDA integration inside Visual Studio",
+        "body": ""
+      },
+      {
+        "hash": "f1675cb",
+        "date": "2026-09-24",
+        "subject": "Track app/data explicitly; only the generated changelog stays ignored",
+        "body": ""
+      },
+      {
+        "hash": "a13613d",
+        "date": "2026-09-24",
+        "subject": "1.5.2: engine at minimaxmusic.cpp 448e880, newer add-on runtimes, editor bundle in the repository, YuE2 Studio in the news",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "items": [
+      {
+        "hash": "d971ded",
+        "date": "2026-09-21",
+        "subject": "chore: update star history chart",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "items": [
+      {
+        "hash": "e9f1bae",
+        "date": "2026-09-14",
+        "subject": "chore: update star history chart",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "date": "2026-09-07",
+    "items": [
+      {
+        "hash": "6d367f7",
+        "date": "2026-09-07",
+        "subject": "chore: update star history chart",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "date": "2026-08-31",
+    "items": [
+      {
+        "hash": "9487aba",
+        "date": "2026-08-31",
+        "subject": "chore: update star history chart",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "date": "2026-08-26",
+    "items": [
+      {
+        "hash": "c830be9",
+        "date": "2026-08-26",
+        "subject": "README: correct the portable models path",
+        "body": "Portable builds keep their data beside the executable in a data\\ folder, so\nthe models live in <unzipped>\\data\\models\\minimaxmusic-cpp\\, not\n<unzipped>\\models\\minimaxmusic-cpp\\ as the model-zoo note claimed. Reported in\nissue #2; confirmed against desktop\\src-tauri\\src\\lib.rs where the portable\ndata root is executable_directory().join(\"data\")."
+      }
+    ]
+  },
+  {
+    "date": "2026-08-24",
+    "items": [
+      {
+        "hash": "b72f0dc",
+        "date": "2026-08-24",
+        "subject": "chore: update star history chart",
+        "body": ""
+      }
+    ]
+  },
+  {
+    "date": "2026-08-20",
+    "items": [
+      {
+        "hash": "8682fb0",
+        "date": "2026-08-20",
+        "subject": "Document the model zoo and the engine's DLLs; fix the site's VRAM tiers",
+        "body": "README gains a full model zoo - every GGUF with a direct download link, its\nsize, the profile that uses it and where the two source repositories publish\nit - plus the folder they belong in, so a file placed by hand is recognised as\ninstalled. A new section explains the engine's DLL chain: what ships inside the\napp, that cuBLAS comes from NVIDIA's own redistributable and the VC++ runtime\nfrom Microsoft, what is never downloaded (the driver's nvcuda.dll), and how to\nplace the libraries by hand behind a proxy or offline. The release note now\nreflects that the script reads the signing key from %USERPROFILE%\\.tauri."
+      },
+      {
+        "hash": "f09c2dd",
+        "date": "2026-08-20",
+        "subject": "Fix three user reports, and take the audio-input feature back out",
+        "body": "Audio in is gone from the build - card, endpoints, encoder, request field,\nstrings. The engine only replays codes whole: the output was always the same\nmusic read back a little muddier, and the caption could not change it. It was a\ndebug tool dressed as a feature. The ONNX-runtime path helper it left behind\nstays; the separator uses it."
+      }
+    ]
+  },
+  {
+    "date": "2026-08-19",
+    "items": [
+      {
+        "hash": "4f678f5",
+        "date": "2026-08-19",
+        "subject": "Read a finished track and render it again",
+        "body": "The encoder MiniMax never published was rebuilt by the community and exported\nto ONNX months ago; it sat in the repository unused, called from nowhere. It is\nwired up now: a track is dropped on the card or chosen, it plays there with its\nwaveform, and the studio reads it into the codes the engine renders from. The\nnext generation replays them - the melody and the structure come from the file,\nthe sound from the caption and the lyrics, which still build the prompt the\ncodes are replayed through. Nothing changes for a request without a track."
+      },
+      {
+        "hash": "1851ad4",
+        "date": "2026-08-19",
+        "subject": "Ask each model for thinking on the terms it publishes",
+        "body": "OpenRouter describes every model's reasoning in a field of its own - not inside\ndefault_parameters, which is where this was looking. The record says which\nefforts the model takes, which one it prefers, and whether it can be asked not\nto think at all:"
+      },
+      {
+        "hash": "45f1e17",
+        "date": "2026-08-19",
+        "subject": "Write down what the cloud was asked, and let a run be given up on",
+        "body": "A request that went wrong left one red line and nothing behind it: the answer\nwas gone the moment the window closed, and a model that wrote almost the right\nthing looked exactly like one that wrote nothing. Every call to OpenRouter is\nnow recorded beside the engine's log - what was asked, how long it took, what\ncame back, and the answer itself whenever it could not be used. The key is\nnever written. Read it at /v1/openrouter/logs or open the file."
+      },
+      {
+        "hash": "ade6d06",
+        "date": "2026-08-19",
+        "subject": "Open the assistant on the engine that was chosen",
+        "body": "Switching the assistant to OpenRouter worked and then came back to llama.cpp on\nevery open. The panel draws itself from one address - the runtime - and the\nchosen engine is kept with the assistant's settings, which that address never\nmentioned. So it fell back to the first tab, every time, whatever had been\nsaved."
+      },
+      {
+        "hash": "fc80358",
+        "date": "2026-08-19",
+        "subject": "Say what the karaoke switch does, and write the news",
+        "body": "The switch reads \"enable karaoke\", which sounds like permission. It is not:\nwith it on, every finished track is timed automatically - that is the whole of\nwhat it does - so it now says so in all five languages."
+      },
+      {
+        "hash": "4a07379",
+        "date": "2026-08-19",
+        "subject": "Leave the tab where the user left it",
+        "body": "Pressing \"write the lyrics and the description\" filled the form and then moved\nthe screen to the Studio tab, on the grounds that this is where the writing\nbecomes visible. It is also where the user was not: they had chosen the simple\ntab and were working there. Looking at what was written is their decision to\nmake, one click away."
+      },
+      {
+        "hash": "eceeb64",
+        "date": "2026-08-19",
+        "subject": "Let the karaoke button work once the recogniser is installed",
+        "body": "A complete installation still answered \"karaoke.model-missing\": a faster-whisper\nmodel is a directory of files, and the readiness check asked whether that path\nwas a file. It never is. The download finished, the panel said ready, and the\nbutton refused."
+      },
+      {
+        "hash": "1bd2036",
+        "date": "2026-08-19",
+        "subject": "Recognise lyrics with faster-whisper, the way Dub Studio does",
+        "body": "Karaoke timings failed with \"whisper-cli produced no LRC file\" and that is all\nanyone could learn: whisper.cpp writes its LRC line by line, word times had to\nbe inferred from it, and when a run went wrong the binary exited zero and wrote\nnothing at all."
+      },
+      {
+        "hash": "b1ae783",
+        "date": "2026-08-19",
+        "subject": "Clear the batch ceiling out of the engine settings entirely",
+        "body": ""
+      },
+      {
+        "hash": "86c0190",
+        "date": "2026-08-19",
+        "subject": "Take the batch slider out of the interface",
+        "body": ""
+      },
+      {
+        "hash": "57e7354",
+        "date": "2026-08-19",
+        "subject": "Put the batch ceiling back to one and take its control away",
+        "body": "The variations slider was unlocked to four, and to make it work the engine had\nto be started with --max-batch 4. That flag reserves the language model's KV\ncache for the whole batch when the weights load, so every single-song\ngeneration - which is nearly all of them - would have paid for three songs it\nnever rendered. Worse, the engine takes it only as a launch flag: there is no\nway to raise it for one request and lower it after, so no amount of interface\nmakes it a live control."
+      },
+      {
+        "hash": "4683e80",
+        "date": "2026-08-19",
+        "subject": "Tell the engine the batch ceiling, and keep its log across a crash",
+        "body": "Asking for two songs failed at once with a 503. The panel offers up to four and\nthe request carries the number, which is what was checked - but the engine has\na ceiling of its own, set by --max-batch when the weights load, because it\nsizes the language model's KV sets. The studio never passed it, so the engine\nloaded with the upstream default of one and refused anything above it. It is\npassed now, and a test holds the two together: what the panel offers is what\nthe engine is started with."
+      },
+      {
+        "hash": "5cbcab8",
+        "date": "2026-08-19",
+        "subject": "Make every panel a whole capability",
+        "body": "Downloading Gemma left the studio insisting no assistant was set up. The panel\nshowed a model chosen and installed; the server had no record of which one,\nbecause the dropdown saved its choice for Whisper only and installing did not\nrecord it either - and readiness is decided by exactly that field. Choosing a\nmodel is now a setting for the assistant and for Parakeet's two precisions as\nwell, and asking for a download records the model it fetches."
+      },
+      {
+        "hash": "274e27f",
+        "date": "2026-08-19",
+        "subject": "Let a download be stopped",
+        "body": "Two downloads could be started by accident and neither could be stopped: the\nonly way out was to quit the studio. Each panel now has a stop button beside\nits percentage, and each capability an endpoint behind it."
+      },
+      {
+        "hash": "ba3b379",
+        "date": "2026-08-19",
+        "subject": "Back off exponentially, the way the Hub's download protocol asks",
+        "body": ""
+      },
+      {
+        "hash": "017bd44",
+        "date": "2026-08-19",
+        "subject": "Follow the Hub's rate limit instead of walking into it",
+        "body": "The download died with \"429 Too Many Requests where 206 was expected\", and the\nflood was ours. Asking the servers what a file weighs marked a URL as known\nonly when the answer arrived, and the panel polls its status every second: two\ndozen HEAD requests per second for as long as a page was open. The Hub allows\nthree thousand requests per five minute window, so that emptied it in about a\nminute - and then refused the download the user was actually waiting for."
+      },
+      {
+        "hash": "3bfae67",
+        "date": "2026-08-19",
+        "subject": "Fetch every model over four connections, and stop trusting compiled-in sizes",
+        "body": "Three of the assistant's models could never install. Their sizes were written\ninto the catalogue when they were added, unsloth re-uploaded the files, and the\ndownload check - \"the file must weigh exactly this\" - failed on 1440 bytes of\nchanged metadata for ever. What a file weighs is the server's answer, not ours,\nso it is asked for and no longer assumed."
+      },
+      {
+        "hash": "34663c4",
+        "date": "2026-08-19",
+        "subject": "Let a request ask for up to four songs at once",
+        "body": ""
+      },
+      {
+        "hash": "2d15b2a",
+        "date": "2026-08-19",
+        "subject": "One place installs a capability, and it reports the set it installs",
+        "body": "A capability could be installed from three screens - the providers page, its\nown settings page and the download panel - each with its own buttons, its own\nlist of files and its own idea of progress. They disagreed: the same assistant\nread \"0/8\" in one place and \"not installed\" in another. The settings pages now\nuse the download panel's group, and the providers page only chooses where a\ncapability runs."
+      },
+      {
+        "hash": "49e23e8",
+        "date": "2026-08-19",
+        "subject": "Read audio, not only write it",
+        "body": "MiniMax published Music 3 without the encoder that turns audio into the codes\nthe model generates, so a finished track could never be handed back to it. The\ncommunity reconstructed the weights; this exports them to ONNX, publishes the\nresult, and wires the path through parts the studio already has - neural-codec\nfor audio to latents, ONNX Runtime for latents to codes, and the engine's own\naudio_codes field to render from them. The export is verified against the\nPyTorch reference with every code identical."
+      },
+      {
+        "hash": "bc18cb1",
+        "date": "2026-08-19",
+        "subject": "An instrumental keeps a song's structure instead of alternating [instrumental]",
+        "body": ""
+      },
+      {
+        "hash": "cc78ca5",
+        "date": "2026-08-19",
+        "subject": "Say that the budget counter counts the caption as well",
+        "body": ""
+      },
+      {
+        "hash": "82445c7",
+        "date": "2026-08-19",
+        "subject": "Make every optional engine the same choice, stated the same way",
+        "body": "Karaoke, stems and the assistant each asked the user something different: a\nlist of file names, a device toggle in another panel, or nothing at all. They\nare now one shape - which engine, what it runs on, which model - in one row\nthat says what it weighs and whether it is here, with download and remove\nbeside it."
+      },
+      {
+        "hash": "829bb36",
+        "date": "2026-08-19",
+        "subject": "An instrumental submits no lyrics, whatever is left in the box",
+        "body": ""
+      },
+      {
+        "hash": "628e597",
+        "date": "2026-08-19",
+        "subject": "One button per engine, and a device choice for the assistant too",
+        "body": ""
+      },
+      {
+        "hash": "377ce7b",
+        "date": "2026-08-19",
+        "subject": "Supervise the engine, and make every local engine a choice",
+        "body": "The engine was started once at launch and only with weights already on disk,\nso a clean install downloaded its models and then waited forever - the state\nevery new user ended in. A supervisor now watches the engine port and starts\nit whenever a complete set is present, which also covers a crash."
+      },
+      {
+        "hash": "3a68cde",
+        "date": "2026-08-19",
+        "subject": "Drop the MSI: it installed per-machine and put the models on the system drive",
+        "body": ""
+      },
+      {
+        "hash": "8ad081d",
+        "date": "2026-08-19",
+        "subject": "Ship only the per-user installer, which can keep its data beside itself",
+        "body": ""
+      },
+      {
+        "hash": "ac919ff",
+        "date": "2026-08-19",
+        "subject": "Keep an installed studio's data beside itself, and wait for the libraries it needs",
+        "body": ""
+      },
+      {
+        "hash": "093b3a0",
+        "date": "2026-08-19",
+        "subject": "Read the binary name from the config the portable build copies",
+        "body": ""
+      },
+      {
+        "hash": "e0434ec",
+        "date": "2026-08-19",
+        "subject": "Give the installed and portable executables the same name",
+        "body": ""
+      },
+      {
+        "hash": "7ec330a",
+        "date": "2026-08-19",
+        "subject": "Keep the signing password beside the key the release script reads",
+        "body": ""
+      },
+      {
+        "hash": "fa99cbd",
+        "date": "2026-08-19",
+        "subject": "Fail the release on an unusable signing key, and stop building what is not shipped",
+        "body": "An encrypted signing key with no password does not fail the build - Tauri\nasks for it on stdin, the build has no console, and the release sits in\nsilence with the installers already written. The key is now read before\nanything is built, and an encrypted one without a password is refused with\nits reason."
+      },
+      {
+        "hash": "01ec963",
+        "date": "2026-08-19",
+        "subject": "Keep the generated release config out of the repository",
+        "body": ""
+      },
+      {
+        "hash": "0807d20",
+        "date": "2026-08-19",
+        "subject": "Stop holding the graphics card when nothing is using it",
+        "body": "The writing assistant kept its five gigabytes after answering, so Music3\nasked for eleven more on a 24 GB card and died - and the studio showed a\nqueued job that would never run. The assistant is unloaded as soon as it\nanswers and again before the engine starts, unless \"keep models in VRAM\nbetween jobs\" is on. It starts itself on the next request, so the only cost\nis a reload."
+      },
+      {
+        "hash": "0303015",
+        "date": "2026-08-19",
+        "subject": "Let a refused optional download reach the button that asked for it",
+        "body": "The separation endpoint started the download inside a spawned task and\ndiscarded its Result, then answered \"started: true\" whatever happened. The\ndownloader takes one job at a time, so a second request came back refused -\ninto a void - while the caller was told it had begun. Pressing the button\ndid nothing, twice, with a successful reply behind it."
+      },
+      {
+        "hash": "b30150e",
+        "date": "2026-08-19",
+        "subject": "Install the libraries the engine cannot start without",
+        "body": "mm-server.exe loads ggml.dll, which loads ggml-cuda.dll, which imports\ncublas64_13.dll and through it cublasLt64_13.dll - static imports, resolved\nby the Windows loader before any of the engine's own code runs. Neither was\nshipped, so on a machine without the CUDA Toolkit the process died in the\nloader and no fallback to the processor was possible. The build machine had\nthem on PATH, which is why this survived a release."
+      },
+      {
+        "hash": "bb6e7cb",
+        "date": "2026-08-19",
+        "subject": "build: the manifest points at the installer of the version being built",
+        "body": ""
+      },
+      {
+        "hash": "6f2becd",
+        "date": "2026-08-19",
+        "subject": "docs: 1.3.1 in the version, the changelog and the news",
+        "body": ""
+      },
+      {
+        "hash": "7c33735",
+        "date": "2026-08-19",
+        "subject": "fix: the studio downloads, deletes and runs what was actually chosen",
+        "body": "Every one of these was found by using the thing, not by reading it."
+      }
+    ]
+  },
+  {
+    "date": "2026-08-18",
+    "items": [
+      {
+        "hash": "5c5e572",
+        "date": "2026-08-18",
+        "subject": "feat: a local model downloads itself the first time it is used",
+        "body": "Choosing Parakeet or Whisper in the settings is the instruction to use it.\nMaking the user then hunt for a download button is a second instruction nobody\ngave, so the first track that needs timings fetches the model and carries on -\nfrom the automatic pass and from the button in the track menu alike."
+      },
+      {
+        "hash": "d2588e0",
+        "date": "2026-08-18",
+        "subject": "feat: a portable copy keeps everything inside its own folder",
+        "body": "People found ten gigabytes of weights in their profile directory and no way to\nremove them from inside the studio. Both halves are fixed."
+      },
+      {
+        "hash": "b0050ec",
+        "date": "2026-08-18",
+        "subject": "docs: each language page actually shows its language",
+        "body": "The generator read docs/index.html, which after the first run was itself a\ngenerated English page carrying apply('en'). Every later run copied that into\nall five files, so ru.html, zh.html, ja.html and ko.html rendered English while\nclaiming their own lang attribute."
+      },
+      {
+        "hash": "5c6d6f8",
+        "date": "2026-08-18",
+        "subject": "docs: a donate page in every language the studio speaks",
+        "body": ""
+      },
+      {
+        "hash": "4009ef8",
+        "date": "2026-08-18",
+        "subject": "docs: the support button goes where money is taken, not to a file in the repository",
+        "body": ""
+      },
+      {
+        "hash": "085cbeb",
+        "date": "2026-08-18",
+        "subject": "docs: one page per language, and the agent config stops being published",
+        "body": ""
+      },
+      {
+        "hash": "08684f2",
+        "date": "2026-08-18",
+        "subject": "docs: follow the branch rename to main",
+        "body": ""
+      },
+      {
+        "hash": "bfd66d4",
+        "date": "2026-08-18",
+        "subject": "docs: point the donate and history links at the branch that exists",
+        "body": ""
+      },
+      {
+        "hash": "c23ced1",
+        "date": "2026-08-18",
+        "subject": "docs: keep local engineering notes out of the published repository",
+        "body": ""
+      },
+      {
+        "hash": "e652703",
+        "date": "2026-08-18",
+        "subject": "build: the release script says where its signing key lives",
+        "body": ""
+      },
+      {
+        "hash": "7f4c51f",
+        "date": "2026-08-18",
+        "subject": "docs: record where the signing key lives and what 1.3.0 shipped",
+        "body": ""
+      },
+      {
+        "hash": "2c4b574",
+        "date": "2026-08-18",
+        "subject": "build: make the release script survive its own toolchain",
+        "body": "Four things stood between this repository and a signed release, each fatal only\nat the end of a long build. PowerShell 5.1 turns a native program's stderr into\na terminating error when output is redirected, so cargo's warnings and git's\n\"Cloning into\" killed the run; exit codes decide now. A function returning the\ncompiler's output as its value poisoned the staged runtime path. Windows\nrefused the engine checkout path once the full commit hash was in it. And the\nupdater manifest was written with an encoding that only exists in PowerShell 7."
+      },
+      {
+        "hash": "a658ac1",
+        "date": "2026-08-18",
+        "subject": "docs: reshoot the studio in five languages and say what it does now",
+        "body": "The screenshots on the page and in the readme were taken before the M3 icon,\nthe model presets, the rebuilt tools panel and stem separation existed, and\nthree of the five languages were missing half the screens."
+      },
+      {
+        "hash": "ce31914",
+        "date": "2026-08-18",
+        "subject": "docs: name the replay for what it does",
+        "body": "\"Rebuild the track\" read as \"generate it again\". It re-renders the same\nmelody from the saved audio codes; only steps, seed, DiT CFG and the\noutput format can differ. The label says so now, in every language."
+      },
+      {
+        "hash": "99f2192",
+        "date": "2026-08-18",
+        "subject": "feat: stems on the graphics card, a transport that seeks, a cover you can see",
+        "body": "- The separator can run on the card: the CUDA build of the ONNX Runtime\n  is a listed optional download, the setting is auto / card / processor,\n  and auto takes the card whenever its runtime is present. Registering\n  the provider is attempted and falls back to the processor out loud\n  rather than silently taking ten times as long.\n- Stems are served with byte ranges. Without them a player cannot seek at\n  all, which is why dragging their position did nothing.\n- Stems play through the studio's own transport instead of the browser's\n  default widget: click or drag the bar to move, arrows for five seconds.\n- The cover window shows the result at 360 pixels square, and a click\n  opens it full screen with wheel zoom, drag to pan, double-click to fit.\n- The menu entry is \"Split into stems\" and opens the track on the tools\n  page, where the choices and the results are. \"Video export\" is \"Create\n  video\". The profile line under the create form opens the page that\n  changes it, instead of stating a fact the user cannot act on.\n- Downloads carry ID3: a track made before tagging existed is tagged on\n  its way out, so an old file no longer arrives untitled."
+      },
+      {
+        "hash": "e22ab93",
+        "date": "2026-08-18",
+        "subject": "feat: separation where it belongs, and an editor that opens",
+        "body": "- The model is listed with the other optional modules on the models page,\n  beside the assistant and karaoke, and downloads from there.\n- Which stems to keep and how carefully to join the segments are chosen\n  on the tools page, next to the button that uses them, and both are\n  remembered. Verified: asking for two stems at the fastest overlap wrote\n  exactly those two.\n- The track is picked by search from a bounded list. A native dropdown\n  showed whole generated captions as options and grew to any width; a\n  library of five thousand tracks is not a list to scroll.\n- \"Stems\" is in the track menu everywhere the menu appears: library,\n  song list, player and the sidebar.\n- The waveform editor is served by the studio itself and opened in the\n  system browser. It was opened with window.open on a relative path,\n  which does nothing at all inside the desktop shell."
+      },
+      {
+        "hash": "278b6ea",
+        "date": "2026-08-18",
+        "subject": "feat: the tools page is about tools now",
+        "body": "It was a diagnostics screen with nothing to do on it. The diagnostics\nbelong next to the flags that produce them, so the engine log moved into\nSettings → Local engine, and this page became what its name says: work\ndone to a finished track."
+      },
+      {
+        "hash": "e978eb3",
+        "date": "2026-08-18",
+        "subject": "fix: the desktop crate needs serde_json now that the configuration carries plugins",
+        "body": "`tauri::generate_context!` expands to code that names serde_json as soon\nas tauri.conf.json has a plugin section, and the updater is one."
+      },
+      {
+        "hash": "61f1d98",
+        "date": "2026-08-18",
+        "subject": "feat: stems, separated natively instead of in a browser tab",
+        "body": "ACE-Step Studio split tracks with an ONNX build of htdemucs running under\nWebAssembly on a page of its own. That is the arrangement this studio\nreplaced everywhere else; here it is replaced too."
+      },
+      {
+        "hash": "de07cd4",
+        "date": "2026-08-18",
+        "subject": "chore: the star chart is rendered here, not fetched from a broken service",
+        "body": "GitHub closed the public stargazers endpoint, so star-history.com and\nstarchart.cc cannot draw this repository's chart. The Action that renders\nit from the repository's own token is back, with the first SVG already\ncommitted so the README is not blank until Monday."
+      },
+      {
+        "hash": "c6b1702",
+        "date": "2026-08-18",
+        "subject": "chore: merge master; the star chart is a live badge now, not a checked-in SVG",
+        "body": ""
+      },
+      {
+        "hash": "f99857e",
+        "date": "2026-08-18",
+        "subject": "feat: ID3 tags, covers that fit, a settings home for cover looks",
+        "body": "- MP3s the studio stores now carry ID3v2.4: title, artist, album, genre\n  when the description states one, TBPM, the lyrics and the cover art.\n  Verified on a real track: TIT2/TALB/TPE1/TBPM/USLT and a 6 MB APIC read\n  back off disk. Section labels never become a genre, and a structured\n  caption with no genre in it leaves the field empty rather than filing\n  every track under \"Global Metadata\".\n- Saving a generated cover failed with \"Failed to fetch\": axum's default\n  body limit is two megabytes and a cover is more. Raised to 256 MB, and\n  an 8 MB payload now stores.\n- Cover looks are a settings page of their own: templates, placeholders,\n  a live example of what the prompt becomes, and the one new covers start\n  from. The cover window opens on that default and has room to write in.\n- External links did nothing in the packaged application because the\n  dialogs stop click propagation, so the document-level handler never\n  saw them. It listens in the capture phase now.\n- Titles follow ACE-Step Studio's own rule, read out of its source rather\n  than guessed: the chorus line, then any sung line, then the description.\n- The changelog starts at this project's first commit; it was showing\n  ACE-Step's entire history."
+      },
+      {
+        "hash": "7a5ebc0",
+        "date": "2026-08-18",
+        "subject": "docs: record what was verified in this round",
+        "body": ""
+      },
+      {
+        "hash": "b80a60e",
+        "date": "2026-08-18",
+        "subject": "docs: a project page in five languages, screenshots from the running studio",
+        "body": "The repository looked like a source tree and not like something anyone\ncould decide to install:"
+      },
+      {
+        "hash": "7e885ad",
+        "date": "2026-08-18",
+        "subject": "feat: local reasoning flags, a set you can switch, names for unnamed tracks",
+        "body": "- llama-server is started with --reasoning/--reasoning-budget and\n  --reasoning-format deepseek, driven by the same setting the cloud path\n  sends as reasoning.effort, instead of leaving thinking to chance.\n- /setup/select uses a set that is already on disk, so a machine with two\n  quantisations installed is no longer stuck on whichever downloaded last.\n- Settings shows the resource page, not the first-run page: no \"first run\"\n  badge, no hardware recommendation banner, and a \"use this set\" button.\n- A request with no title is named the way ACE-Step Studio names one: the\n  first sung line, or the first words of the style.\n- The provider panel shows the model the studio would use, so a key alone\n  is enough to start.\n- Cover prompts are templates with {title}/{style}/{excerpt}/{duration},\n  saved between runs and filled in from the track the cover is for.\n- A window whose service has died says so instead of counting seconds at\n  an engine that is not starting.\n- opener:allow-open-url carries a scope; without one the plugin refused\n  every external link in the packaged application."
+      },
+      {
+        "hash": "2fc40fa",
+        "date": "2026-08-18",
+        "subject": "fix: each model's own sampling, a catalog that is fetched once, and links that open",
+        "body": "Three things that were the program's job, not the user's."
+      },
+      {
+        "hash": "59e5d08",
+        "date": "2026-08-18",
+        "subject": "fix: the download page only when something is missing, and a catalog worth choosing from",
+        "body": "The studio showed its first-run page on every launch, for the second before it\nknew anything, and again while the engine was starting - so a fully installed\nmachine was repeatedly shown a 26 GB bill. There are three states now, and the\nunknown one is a wait rather than a decision: the download page appears only\nonce the studio has answered that components are genuinely missing."
+      },
+      {
+        "hash": "29ec4c5",
+        "date": "2026-08-18",
+        "subject": "feat: the engine's own screen, real news, a changelog from git, and links that open",
+        "body": "The first run and the engine starting were the same page, so a fully\ninstalled studio was shown a 26 GB download while it waited three seconds for\na process. They are separate now: the download page appears only when\ncomponents are missing, the engine gets its own quiet screen with the step it\nis on, a moving bar, the seconds, and its log; and choosing quantisations\nafterwards lives in Settings → Models, where a settings decision belongs."
+      },
+      {
+        "hash": "3415a72",
+        "date": "2026-08-18",
+        "subject": "fix: no orphans, no waiting for a button, and a first run that shows its work",
+        "body": "Three things a user should never have to do for the program."
+      },
+      {
+        "hash": "aaf6465",
+        "date": "2026-08-18",
+        "subject": "fix: fetch the OpenRouter catalog when it is needed, and say the assistant is working",
+        "body": "Pressing the assistant button answered \"Refresh the OpenRouter catalog before\nusing the assistant\" - pointing at a button on another screen, for a cache\nthat is empty after every restart because it lives in memory. The service now\nfetches the catalog itself the first time anything needs it; transcription,\ncover art, karaoke and the assistant all go through one place."
+      },
+      {
+        "hash": "08d5d6d",
+        "date": "2026-08-18",
+        "subject": "fix(ui): name the model each role loads, ask for the quality the model can give",
+        "body": "Two things the panel got wrong about what is actually happening."
+      },
+      {
+        "hash": "d5d7024",
+        "date": "2026-08-18",
+        "subject": "feat(assistant): carry MiniMax's caption skill whole, and route through it",
+        "body": "The assistant was following a transcription of MiniMax's demo prompt. They\npublish the real thing with the model - the music-caption-rewriter skill: a\ngenre router, eighteen family indexes and a thousand complete captions written\nthe way Music3 wants to be addressed."
+      },
+      {
+        "hash": "3312884",
+        "date": "2026-08-18",
+        "subject": "feat(karaoke): time every word, not just the line",
+        "body": "A line time alone leaves a karaoke player one option - sweep the highlight\nfrom the start of the line to the start of the next - and that drifts off the\nsinging within a couple of words. This is the whole point of karaoke timings,\nso they are now per word."
+      },
+      {
+        "hash": "576bc6c",
+        "date": "2026-08-18",
+        "subject": "feat(ui): a first run that shows what it is about to do",
+        "body": "The old screen offered a radio list of profiles and hid the actual components\nbehind \"show all profiles and manual assembly\", so what would be downloaded,\nand what was already here, took clicking to find out."
+      },
+      {
+        "hash": "03242e1",
+        "date": "2026-08-18",
+        "subject": "docs: record karaoke and how the three recognisers actually performed",
+        "body": ""
+      },
+      {
+        "hash": "4a47cd8",
+        "date": "2026-08-18",
+        "subject": "feat(ui): karaoke lives in the track menu, where the other track actions are",
+        "body": ""
+      },
+      {
+        "hash": "2c7e9b8",
+        "date": "2026-08-18",
+        "subject": "fix(openrouter): the recognisers were never in the catalog we fetched",
+        "body": "OpenRouter publishes speech-to-text models only behind\n`?output_modalities=transcription`, and they declare their output as\n\"transcription\" rather than \"text\". The catalog fetched the plain listing and\ninferred capabilities from \"text\", so it knew of 38 audio-capable chat models\nand not one dedicated recogniser - no Whisper, no Deepgram, no Chirp - and\nkaraoke on OpenRouter could only refuse."
+      },
+      {
+        "hash": "28b5edd",
+        "date": "2026-08-18",
+        "subject": "fix: find the models where they actually are, and say what a preset will cost",
+        "body": "Two things a stray click exposed."
+      },
+      {
+        "hash": "e92d25f",
+        "date": "2026-08-18",
+        "subject": "feat(karaoke): the switch, the engine choice and the button on a track",
+        "body": "Settings gains a karaoke section: one switch, three recognisers, and only the\ndownloads the chosen one needs - Parakeet with its ONNX Runtime, Whisper with\nits CUDA or CPU build and a model, OpenRouter with a model id. Off by default,\nand with it off nothing about karaoke appears anywhere."
+      },
+      {
+        "hash": "92acf8e",
+        "date": "2026-08-18",
+        "subject": "feat(karaoke): time a track's own lyrics with a recogniser of the user's choice",
+        "body": "Karaoke needs timings, and the video studio has been able to draw them all\nalong - it parses LRC and renders the current line - but nothing produced the\nfile. This adds the half that was missing."
+      },
+      {
+        "hash": "94c1c0f",
+        "date": "2026-08-18",
+        "subject": "chore: refresh the desktop lockfile after the zip dependency",
+        "body": ""
+      },
+      {
+        "hash": "cdd23d3",
+        "date": "2026-08-18",
+        "subject": "docs: note where a locally built desktop binary expects the engine",
+        "body": ""
+      },
+      {
+        "hash": "bc15d49",
+        "date": "2026-08-18",
+        "subject": "fix(ui): say the service is down instead of demanding a 12 GB download",
+        "body": "When the local service stopped answering, every screen fell back to \"no model\nprofile installed\" and told the user to download the five Music3 components -\nwhich are already on disk. The status polling now separates \"nobody answered\"\nfrom \"the service says it is not ready\": the sidebar shows one honest line and\nthe create panel says the service is not running and needs a restart, with the\nlibrary left untouched."
+      }
+    ]
+  },
+  {
+    "date": "2026-08-17",
+    "items": [
+      {
+        "hash": "7cea9ba",
+        "date": "2026-08-17",
+        "subject": "fix(ui): show the description, not the scaffolding, under a track title",
+        "body": "A caption for this model is a labelled document, so the library, search and\nsong lists were reading \"Global Metadata Basic Attributes: bpm is 118. key is\nF# minor...\" as a subtitle. They now skip the section headings and the\ntechnical attributes and start where the music is actually described."
+      },
+      {
+        "hash": "9b75d9c",
+        "date": "2026-08-17",
+        "subject": "docs: record the final verification run",
+        "body": ""
+      },
+      {
+        "hash": "9b8aa9a",
+        "date": "2026-08-17",
+        "subject": "fix: keep the full request in a track's provenance, and give it a real title",
+        "body": "Two things the rebuilt form exposed, both verified against real renders."
+      },
+      {
+        "hash": "a7f67fa",
+        "date": "2026-08-17",
+        "subject": "feat(assistant): run a GGUF that is already on this machine, and explain failures",
+        "body": "Downloading a second copy of Gemma is pointless when the machine already keeps\none for another tool, so the managed mode now also accepts a path to any text\nGGUF. It is used where it lies - nothing is copied - and the file is checked\nfor the GGUF magic before llama-server is asked to load it."
+      },
+      {
+        "hash": "8c07467",
+        "date": "2026-08-17",
+        "subject": "docs: bring the handoff up to date with the rebuilt form and the assistant",
+        "body": ""
+      },
+      {
+        "hash": "a47aa8d",
+        "date": "2026-08-17",
+        "subject": "feat: let Studio download and run the assistant model itself",
+        "body": "The assistant could only use OpenRouter or a server the user had already set\nup. This adds the third way the request asked for: pick a model, press\nDownload, and Studio fetches it along with the llama.cpp runtime and runs\nllama-server as a sidecar on demand."
+      },
+      {
+        "hash": "1455587",
+        "date": "2026-08-17",
+        "subject": "feat(ui): configure the optional writing assistant from Settings",
+        "body": "It could only be turned on by hand with a PUT to /v1/assistant/status, which\nis not a feature anyone can use. Settings now carries the same three states\nthe service already supported - off, a local OpenAI-compatible server, or\nOpenRouter - with the OpenRouter model picked from the live catalog filtered\nto models that actually declare the text capability."
+      },
+      {
+        "hash": "045fc9e",
+        "date": "2026-08-17",
+        "subject": "refactor(ui): lay the request form out in cards, not a stack of accordions",
+        "body": "The fields were right but the arrangement was not: six collapsible sections\nof equal weight, four identical grey toolbar buttons, and fixed-height boxes\nfor sections that routinely run past a thousand characters."
+      },
+      {
+        "hash": "5d47311",
+        "date": "2026-08-17",
+        "subject": "feat: rebuild the request form the way this model is actually used",
+        "body": "The previous form was invented rather than researched. This one follows what\nevery implementation of MiniMax Music 3 agrees on - the reference client that\nships with the engine, ComfyUI's native nodes, MiniMax's model card and their\nown demo Space:"
+      },
+      {
+        "hash": "92c4f8d",
+        "date": "2026-08-17",
+        "subject": "docs: record the restored Video Studio and its local encoding",
+        "body": ""
+      },
+      {
+        "hash": "0232974",
+        "date": "2026-08-17",
+        "subject": "feat: bring back ACE's Video Studio, encoding locally instead of on a server",
+        "body": "The video generator was dropped during the port because it rendered through\nthe ACE Node service. The composer itself is model-independent — canvas,\naudio analyser, ten visualiser presets, particles, effects, text layers,\nrandom picsum backgrounds, Pexels search, album art placement — so it is\nrestored exactly as it was, and only the parts that needed that service are\nreplaced:"
+      },
+      {
+        "hash": "d4aa614",
+        "date": "2026-08-17",
+        "subject": "docs: record the verification of catalogue, defaults, flags and packaging",
+        "body": ""
+      },
+      {
+        "hash": "03c5e06",
+        "date": "2026-08-17",
+        "subject": "fix(app): finish localisation and make the packaged app reach its own service",
+        "body": "Two defects that only showed up in the real application:"
+      },
+      {
+        "hash": "ecc83e1",
+        "date": "2026-08-17",
+        "subject": "feat: expose the engine's per-request component choice and a real re-render dialog",
+        "body": "Two things minimaxmusic.cpp can do that the studio could not reach:"
+      },
+      {
+        "hash": "be3fa18",
+        "date": "2026-08-17",
+        "subject": "test: cover engine option persistence and the batch ceiling",
+        "body": ""
+      },
+      {
+        "hash": "49efac4",
+        "date": "2026-08-17",
+        "subject": "feat: expose the engine's real launch options and honour --max-batch",
+        "body": "minimaxmusic.cpp takes launch flags that change how the whole session uses\nthe GPU, and none of them were reachable. Settings now has a Local engine\nsection for the real flags — keep models in VRAM (--keep-loaded), songs per\nrequest (--max-batch), LM KV cache (--max-seq), and the diagnostics switches\n(--no-fa, --no-batch-cfg, --clamp-fp16) — persisted with the studio settings."
+      },
+      {
+        "hash": "e6c341d",
+        "date": "2026-08-17",
+        "subject": "feat(library): make the import tab a working audio import",
+        "body": "The library carried an \"Uploads\" tab left over from ACE reference tracks; it\nlisted a collection this build no longer has and could only ever be empty.\nMeanwhile POST /v1/library/import existed on the service with nothing in the\nUI able to reach it."
+      },
+      {
+        "hash": "3c803bf",
+        "date": "2026-08-17",
+        "subject": "feat: measure track length from the audio and document the fork honestly",
+        "body": "Track length came from the engine's replay request, which is sparse: a\n60-second track omits the duration field because 60 is the default, so the\nlibrary showed 0:00. Length is now measured from the rendered file — the WAV\nheader, or the declared bitrate for MP3 — which also gives imported audio a\nreal duration. A replay keeps the title of the track it reproduces instead of\nderiving a new one from the caption."
+      },
+      {
+        "hash": "1af1d57",
+        "date": "2026-08-17",
+        "subject": "feat: ship the studio as one executable with its own icon",
+        "body": "The release was a launcher plus a second binary: the shell started\nmusic-server.exe as a child process and had to find, wait for and later kill\nit. The service is a Rust crate, so it is now a library the desktop binary\nhosts on its own runtime thread. A release is a single .exe — no companion\nprogram, no batch file, nothing left running if the window closes — and the\nservice in turn is the single owner of the minimaxmusic.cpp engine, which\nremoves the second, competing owner in the shell."
+      },
+      {
+        "hash": "1c99d59",
+        "date": "2026-08-17",
+        "subject": "fix(app): ship a real Tailwind build and repair the dark theme",
+        "body": "The studio pulled Tailwind from a CDN at every launch and declared its dark\nsurfaces as `dark:bg-suno-DEFAULT`. That class does not exist — Tailwind\nexposes a palette's DEFAULT entry as `bg-suno` — so the setup screen, the\ncreate panel and the library rendered on a white background while the rest\nof the app was dark, and the whole layout collapsed to unstyled HTML\nwhenever the CDN was unreachable."
+      },
+      {
+        "hash": "6ad0339",
+        "date": "2026-08-17",
+        "subject": "fix(desktop,setup): make the shell actually launch and downloads actually resume",
+        "body": "Running the built desktop executable exposed three defects that a build\nalone could not:"
+      },
+      {
+        "hash": "ba5144b",
+        "date": "2026-08-17",
+        "subject": "fix(app): replace ACE-era row chrome with real Music3 provenance",
+        "body": "The library rows still described an ACE world: an \"XL\" model badge, an\n\"Unknown\" creator with a link to a profile page that no longer exists, a\nprivate/public lock for a single-user local library, and a workspace\nbreadcrumb for a workspace concept this build does not have."
+      },
+      {
+        "hash": "bb743c0",
+        "date": "2026-08-17",
+        "subject": "feat(app): move every studio screen onto the native Music3 API",
+        "body": "The UI no longer contains a client for the retired ACE Node service. What\nchanged, screen by screen:"
+      },
+      {
+        "hash": "04be733",
+        "date": "2026-08-17",
+        "subject": "feat(server): restore the resource monitor as measured native telemetry",
+        "body": "ACE Studio had a resource readout and the first port dropped it. This\nbrings it back reading real values instead of estimates: GPU utilisation,\nVRAM, temperature and power draw from nvidia-smi, system CPU and RAM, the\nmemory of the mm-server engine process and of the studio server itself.\nCounters a card does not report stay absent instead of being shown as zero,\nand the CPU sampler is primed so the first reading is not a fake 100%."
+      },
+      {
+        "hash": "8121559",
+        "date": "2026-08-17",
+        "subject": "chore: remove the inherited ACE-Step Studio sources",
+        "body": "This repository is a fork that replaces ACE inference with a native\nMiniMax Music3 stack; the ACE sources live in their own repository and\ncarrying them here only produced screens and routes with no backend."
+      },
+      {
+        "hash": "ec87cc7",
+        "date": "2026-08-17",
+        "subject": "fix(server): make model recommendation hardware-aware and drop phantom engines",
+        "body": "- /setup/status and the catalog now report the profile the machine can\n  actually run (Full Native at >=20 GB, Q8 Quality at >=10 GB, Light only\n  in the low-VRAM tier) instead of a fixed catalog constant, and readiness\n  and remaining bytes are measured against the set the user selected.\n- the unreachable native-balanced recommendation branch is removed and the\n  GPU probe is cached, so setup polling no longer runs nvidia-smi per second.\n- default and persisted configurations no longer name local engines this\n  build does not ship (parakeet-tdt, local-llm); such selections are\n  sanitized at startup.\n- OpenRouter credentials can now be stored locally instead of requiring an\n  environment variable, and are never serialized into any response.\n- new GET /v1/engine/logs exposes the native mm-server log ring.\n- generated songs get a readable title (explicit or derived) rather than\n  storing the whole caption as the track name."
+      },
+      {
+        "hash": "f325244",
+        "date": "2026-08-17",
+        "subject": "docs: add complete engineering handoff",
+        "body": ""
+      },
+      {
+        "hash": "42d4be4",
+        "date": "2026-08-17",
+        "subject": "feat: add native library audio import",
+        "body": ""
+      },
+      {
+        "hash": "1b70091",
+        "date": "2026-08-17",
+        "subject": "feat: establish native MiniMax Music3 Studio foundation",
+        "body": ""
+      },
+      {
+        "hash": "c2c5068",
+        "date": "2026-08-17",
+        "subject": "chore: update star history chart",
+        "body": ""
+      }
+    ]
+  }
+]

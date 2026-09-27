@@ -4,23 +4,20 @@ import { useI18n } from '../context/I18nContext';
 import { DevicePicker, type Device } from './DevicePicker';
 import { AssistantExtras } from './AssistantSettings';
 import { KaraokeExtras } from './KaraokeSettings';
-import {
-  componentKindLabel,
-  componentPrecision,
-  componentsByKind,
-  completeCustomComponentIds,
-  profileLabel,
-  selectedComponentBytes,
-  type ModelComponent,
-} from '../services/modelCatalog';
+import * as yue2Catalog from '../services/modelCatalog';
+import * as music3Catalog from '../services/music3ModelCatalog';
+import type { ModelComponent } from '../services/modelCatalog';
 
 /**
  * First run.
  *
- * The engine needs a backbone and a VAE (SheetSage2 optional), so the page
- * is built around that: one row per role, one quantisation chosen inside each,
+ * The engine needs a full set and refuses an incomplete one, so the page is
+ * built around that: one row per role, one quantisation chosen inside each,
  * everything preselected for the detected card and marked installed or
- * missing. The optional extras - a writing assistant, karaoke timings - are
+ * missing. Which roles those are belongs to the engine - YuE2 runs a backbone
+ * and a VAE (SheetSage2 optional for covers), Music 3 runs its five components
+ * - which is why the list is picked from the engine rather than fixed here.
+ * The optional extras - a writing assistant, karaoke timings - are
  * listed underneath, plainly marked optional and never preselected, because
  * the studio makes music without either of them.
  */
@@ -590,7 +587,14 @@ export const OptionalGroup: React.FC<{
  * and the question is only which of them to use.
  */
 export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 'settings'; focus?: string | null }> = ({ onReady, mode = 'first-run', focus = null }) => {
-  const { t } = useI18n();
+  const { t, engine } = useI18n();
+  // Which roles make a complete set, and what they are called, is the engine's
+  // own business: Music 3 has five components and no optional one, YuE2 has a
+  // backbone, a VAE and an optional transcriber.
+  const music3 = engine === 'mm3';
+  const kindLabel = (kind: string) => (music3 ? music3Catalog.componentKindLabel(kind) : yue2Catalog.componentKindLabel(kind));
+  const precision = (component: ModelComponent) => (music3 ? music3Catalog.componentPrecision(component) : yue2Catalog.componentPrecision(component));
+  const bytesOf = (components: ModelComponent[], ids: string[] | null) => (music3 ? music3Catalog.selectedComponentBytes(components, ids) : yue2Catalog.selectedComponentBytes(components, ids));
   const [status, setStatus] = useState<SetupStatus | null>(null);
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [choice, setChoice] = useState<Record<string, string>>({});
@@ -644,11 +648,23 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
     return () => window.clearInterval(timer);
   }, [refresh]);
 
-  const groups = useMemo(() => componentsByKind(catalog?.components || []), [catalog]);
-  const chosenIds = useMemo(() => completeCustomComponentIds(catalog?.components || [], choice), [catalog, choice]);
+  const groups = useMemo(
+    () => (music3
+      ? music3Catalog.componentsByKind(catalog?.components || [])
+        .map((group) => ({ kind: group.kind, optional: false, components: group.components }))
+      : yue2Catalog.componentsByKind(catalog?.components || [])),
+    [catalog, music3],
+  );
+  const chosenIds = useMemo(
+    () => (music3
+      ? music3Catalog.completeCustomComponentIds(catalog?.components || [], choice)
+      : yue2Catalog.completeCustomComponentIds(catalog?.components || [], choice)),
+    [catalog, choice, music3],
+  );
   const chosenBytes = useMemo(
-    () => selectedComponentBytes(catalog?.components || [], chosenIds ?? chosenValues),
-    [catalog, chosenIds, chosenValues],
+    () => bytesOf(catalog?.components || [], chosenIds ?? chosenValues),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bytesOf is the engine's own function of the same two arguments.
+    [catalog, chosenIds, chosenValues, music3],
   );
   /// The set the studio would pick for this card, by name, so the sentence at
   /// the top says the same thing as the list underneath.
@@ -750,7 +766,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
               prose in a Russian window, and it called the answer "Native
               quality", which reads as the unquantised weights it is not. */}
           {recommended
-            ? `${status?.hardware?.gpuName ?? ''}${status?.hardware?.totalVramGb ? `, ${status.hardware.totalVramGb.toFixed(1)} GB` : ''} — ${profileLabel(t, recommended)} · ${bytes(recommended.total_bytes)}`
+            ? `${status?.hardware?.gpuName ?? ''}${status?.hardware?.totalVramGb ? `, ${status.hardware.totalVramGb.toFixed(1)} GB` : ''} — ${yue2Catalog.profileLabel(t, recommended)} · ${bytes(recommended.total_bytes)}`
             : status?.hardware?.reason || t('recommendedFallback')}
           . {t('setupResumable')}
         </div>}
@@ -785,7 +801,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
                     const parts = profile.components
                       .map((id) => catalog?.components.find((entry) => entry.id === id))
                       .filter((component): component is ModelComponent => Boolean(component))
-                      .map((component) => `${componentKindLabel(component.kind)} ${componentPrecision(component)}`);
+                      .map((component) => `${kindLabel(component.kind)} ${precision(component)}`);
                     return (
                       <button
                         key={profile.id}
@@ -803,7 +819,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
                         }`}
                       >
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="text-sm font-semibold text-zinc-900 dark:text-white">{profileLabel(t, profile)}</span>
+                          <span className="text-sm font-semibold text-zinc-900 dark:text-white">{yue2Catalog.profileLabel(t, profile)}</span>
                           {profile.recommended && (
                             <span className="rounded-full bg-pink-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-pink-600 dark:text-pink-300">
                               {t('recommendedBadge')}
@@ -816,7 +832,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
                           <p className={`text-[11px] font-medium ${missingHere.length === 0 ? 'text-emerald-600 dark:text-emerald-300' : 'text-zinc-500'}`}>
                             {missingHere.length === 0
                               ? t('installed')
-                              : `${t('toDownload')} ${bytes(selectedComponentBytes(catalog?.components || [], missingHere))}`}
+                              : `${t('toDownload')} ${bytes(bytesOf(catalog?.components || [], missingHere))}`}
                           </p>
                           {missingHere.length === 0 && (
                             <span
@@ -845,7 +861,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
               return (
                 <div key={group.kind} className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-2">
                   <label className="min-w-0">
-                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{componentKindLabel(group.kind)}</span>
+                    <span className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{kindLabel(group.kind)}</span>
                     <select
                       value={selectedId}
                       onChange={(event) => setChoice((current) => ({ ...current, [group.kind]: event.target.value }))}
@@ -855,7 +871,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
                       <option value="">{group.optional ? t('noTranscriber') : t('chooseComponent')}</option>
                       {group.components.map((component) => (
                         <option key={component.id} value={component.id}>
-                          {componentPrecision(component)} — {bytes(component.bytes)}{installedIds.includes(component.id) ? ` · ${t('installed')}` : ''}
+                          {precision(component)} — {bytes(component.bytes)}{installedIds.includes(component.id) ? ` · ${t('installed')}` : ''}
                         </option>
                       ))}
                     </select>
@@ -946,7 +962,7 @@ export const SetupGate: React.FC<{ onReady?: () => void; mode?: 'first-run' | 's
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-pink-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-all hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {starting ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
-              {missing.length === 0 ? t('everythingInstalled') : `${t('downloadSelectedProfile')} · ${bytes(selectedComponentBytes(catalog?.components || [], missing))}`}
+              {missing.length === 0 ? t('everythingInstalled') : `${t('downloadSelectedProfile')} · ${bytes(bytesOf(catalog?.components || [], missing))}`}
             </button>
           )}
           {canApply && (

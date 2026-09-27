@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Disc, Layers, Library, Moon, Newspaper, Search, SlidersHorizontal, Sun } from 'lucide-react';
+import { ChevronUp, Cpu, Disc, Layers, Library, Moon, Newspaper, Search, SlidersHorizontal, Sun } from 'lucide-react';
 import { View } from '../types';
 import { useI18n } from '../context/I18nContext';
 import { profileLabel } from '../services/modelCatalog';
@@ -15,6 +15,8 @@ interface SidebarProps {
   onOpenSettings?: () => void;
   isOpen?: boolean;
   onToggle?: () => void;
+  /** The engine answering, which decides the mark the studio shows. */
+  engineId?: string | null;
 }
 
 type NativeSetupStatus = {
@@ -71,6 +73,27 @@ const SystemWidget: React.FC<{ isOpen?: boolean }> = ({ isOpen }) => {
   // The credential lives in the native server, never in browser storage, so
   // the badge asks the server whether one is configured.
   const openRouterConfigured = openRouter?.configured === true;
+  // Which engine is answering: the YuE2 service, or the Music 3 one started in
+  // its place. The choice is the shell's, and switching swaps the service under
+  // the open window - so the native command is asked, not a setting.
+  const currentEngine: 'yue2' | 'mm3' = setup?.engine_id === 'minimaxmusic-cpp' ? 'mm3' : 'yue2';
+  const [engineMenuOpen, setEngineMenuOpen] = useState(false);
+  const [engineSwitching, setEngineSwitching] = useState(false);
+  const chooseEngine = async (engine: 'yue2' | 'mm3') => {
+    setEngineMenuOpen(false);
+    if (engine === currentEngine || engineSwitching) return;
+    // The page is reloaded by the shell once the other service answers: the
+    // window stays, and nothing here survives the switch, so the only state
+    // worth setting is the one that says the studio is busy.
+    setEngineSwitching(true);
+    try {
+      const { invoke } = await import('@tauri-apps/api/core');
+      await invoke('set_engine', { engine });
+    } catch {
+      // A window outside the desktop shell cannot switch engines; nothing to do.
+      setEngineSwitching(false);
+    }
+  };
   const engineReady = setup?.engine_ready === true;
   const modelReady = setup?.ready === true;
   const profile = setup?.selected_profile_id
@@ -100,6 +123,36 @@ const SystemWidget: React.FC<{ isOpen?: boolean }> = ({ isOpen }) => {
 
   return (
     <div className="space-y-1.5 rounded-xl border border-zinc-200/70 bg-zinc-50/80 px-3 py-2 text-[10px] dark:border-white/5 dark:bg-zinc-900/50">
+      <div className="relative">
+        <button
+          type="button"
+          disabled={engineSwitching}
+          onClick={() => setEngineMenuOpen((value) => !value)}
+          className="flex w-full items-center gap-1.5 rounded-lg px-1.5 py-1 text-left text-zinc-600 transition-colors hover:bg-zinc-200/60 hover:text-black disabled:opacity-60 dark:text-zinc-300 dark:hover:bg-white/5 dark:hover:text-white"
+          title={t('engineChoice')}
+        >
+          <Cpu size={11} className={`shrink-0 ${engineSwitching ? 'animate-pulse' : ''}`} />
+          <span className="truncate">{t('engineChoice')}: {engineSwitching ? t('engineSwitching') : currentEngine === 'mm3' ? t('engineMusic3') : t('engineYue2')}</span>
+          <ChevronUp size={11} className={`ml-auto shrink-0 transition-transform ${engineMenuOpen ? '' : 'rotate-180'}`} />
+        </button>
+        {engineMenuOpen && (
+          <div className="absolute bottom-full left-0 z-20 mb-1 w-full overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-lg dark:border-white/10 dark:bg-zinc-900">
+            {([
+              ['yue2', t('engineYue2')],
+              ['mm3', t('engineMusic3')],
+            ] as const).map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => void chooseEngine(id)}
+                className={`flex w-full items-center gap-2 px-2.5 py-1.5 text-left transition-colors hover:bg-zinc-100 dark:hover:bg-white/5 ${currentEngine === id ? 'font-medium text-pink-500' : 'text-zinc-600 dark:text-zinc-300'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <StatusLine active={engineReady && modelReady} pending={!unreachable && !(engineReady && modelReady)} label={engineLabel} />
       <StatusLine active={modelReady} pending={!unreachable && !modelReady} label={modelLabel} />
       <StatusLine active={openRouterConfigured} label={openRouterConfigured ? t('openRouterConfigured') : t('openRouterNotConfigured')} />
@@ -116,8 +169,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenSettings,
   isOpen = true,
   onToggle,
+  engineId,
 }) => {
   const { t } = useI18n();
+  // The mark follows the engine: one window over two products, and each shows
+  // the name and the icon it has on its own.
+  const brand = engineId === 'minimaxmusic-cpp'
+    ? { name: 'MiniMax Music3 Studio', mark: '/brand/m3.png' }
+    : { name: 'YuE2 Studio', mark: '/brand/yue2.png' };
 
   return (
     <>
@@ -128,15 +187,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <aside className={`fixed inset-y-0 left-0 z-50 flex h-full min-h-0 shrink-0 flex-col overflow-hidden border-r border-zinc-200 bg-white py-4 transition-[width,transform] duration-300 dark:border-white/5 dark:bg-suno-sidebar md:relative md:inset-auto ${isOpen ? 'w-[min(20rem,calc(100vw-2.5rem))] md:w-[200px]' : 'w-[72px]'}`}>
         <div className="mb-6 flex min-w-0 items-center justify-between gap-2 px-3">
           <div className="flex min-w-0 items-center gap-3">
-            {/* The studio mark: the application icon. */}
-            <button type="button" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px] shadow-lg transition-transform hover:scale-105" onClick={() => onNavigate('create')} title="YuE2 Studio">
+            {/* The studio mark: the icon of the engine that is answering. */}
+            <button type="button" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[11px] shadow-lg transition-transform hover:scale-105" onClick={() => onNavigate('create')} title={brand.name}>
               {/* The application's own icon, so the window and the taskbar
                   show the same mark. */}
-              <img src="/brand/yue2.png" alt="" className="h-10 w-10 rounded-[11px]" />
+              <img src={brand.mark} alt="" className="h-10 w-10 rounded-[11px]" />
             </button>
             {isOpen && (
-              <span className="min-w-0 text-[13px] font-bold leading-[1.15] text-zinc-900 dark:text-white" title="YuE2 Studio">
-                YuE2 Studio
+              <span className="min-w-0 text-[13px] font-bold leading-[1.15] text-zinc-900 dark:text-white" title={brand.name}>
+                {brand.name}
               </span>
             )}
           </div>

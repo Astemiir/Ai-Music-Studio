@@ -116,7 +116,7 @@ export const ko = {
     settings: '설정',
 
     // Username Modal
-    welcomeTitle: 'MiniMax Music3 Studio에 오신 것을 환영합니다',
+    welcomeTitle: 'Ai Music Studio에 오신 것을 환영합니다',
     welcomeSubtitle: 'AI 음악 제작을 시작하려면 이름을 입력하세요',
     yourName: '이름',
     enterYourName: '이름 입력',
@@ -365,7 +365,7 @@ export const ko = {
     failedToDeleteSong: '곡 삭제에 실패했습니다',
 
     // Sidebar
-    aceStepUI: 'MiniMax Music3 Studio',
+    aceStepUI: 'Ai Music Studio',
     collapseSidebar: '사이드바 접기',
     expandSidebar: '사이드바 펼치기',
     monitoring: '모니터링',
@@ -865,7 +865,7 @@ export const ko = {
     shareViaEmail: '이메일로 공유',
     copyLink: '링크 복사',
     emailSubject: '이 AI 곡을 들어보세요',
-    emailBody: '안녕하세요!\n\n제가 만든 이 AI 생성 곡을 들어보세요. 마음에 드실 거예요:\n\n"{title}" - {creator}\n{style}\n\n여기서 들으세요: {url}\n\nMiniMax Music3 Studio로 제작.',
+    emailBody: '안녕하세요!\n\n제가 만든 이 AI 생성 곡을 들어보세요. 마음에 드실 거예요:\n\n"{title}" - {creator}\n{style}\n\n여기서 들으세요: {url}\n\nAi Music Studio로 제작.',
 
     // Reference Modal
     referenceModalTitle: '참조 음악',
@@ -1269,7 +1269,7 @@ export const ko = {
     dockMonitor: '리소스 모니터 도킹',
     firstRun: '첫 실행',
     studioOfflineTitle: '스튜디오가 실행 중이 아닙니다',
-    studioOfflineBody: '창은 열려 있지만 스튜디오 서비스가 응답하지 않습니다. 앱이 닫혔거나 중지되었습니다. MiniMax Music3 Studio를 다시 실행하면 이 화면은 저절로 돌아옵니다.',
+    studioOfflineBody: '창은 열려 있지만 스튜디오 서비스가 응답하지 않습니다. 앱이 닫혔거나 중지되었습니다. Ai Music Studio를 다시 실행하면 이 화면은 저절로 돌아옵니다.',
     studioOfflineRetrying: '다시 연결하는 중',
     studioOfflineRetry: '지금 확인',
     resourcesTitle: '모델과 양자화',
@@ -1334,6 +1334,10 @@ export const ko = {
     engineUnavailable: '로컬 런타임을 사용할 수 없습니다',
     engineReachable: 'Music3 엔진 연결됨',
     engineStarting: 'Music3 엔진 시작 중',
+    engineChoice: '엔진',
+    engineYue2: 'YuE2',
+    engineMusic3: 'Music 3',
+    engineSwitching: '엔진 전환 중…',
     profileReady: '프로필 준비됨',
     profileNotInstalled: '모델 프로필 미설치',
     noProfile: '프로필 없음',
@@ -1475,7 +1479,7 @@ export const ko = {
     assistantOwnFile: '또는 이 컴퓨터에 이미 있는 GGUF',
     assistantOwnFileHint: '이미 있는 텍스트 GGUF 의 전체 경로. 그대로 사용하며 내려받거나 복사하지 않습니다.',
     serviceUnavailable: '스튜디오 서비스가 응답하지 않습니다',
-    serviceUnavailableHint: '로컬 서비스가 실행 중이 아닙니다. MiniMax Music3 Studio 를 다시 시작하세요. 라이브러리는 사라지지 않습니다.',
+    serviceUnavailableHint: '로컬 서비스가 실행 중이 아닙니다. Ai Music Studio 를 다시 시작하세요. 라이브러리는 사라지지 않습니다.',
     karaokeSection: '노래방 타이밍',
     karaokeHint: '곡의 가사를 인식기의 타임라인에 올려 비디오 스튜디오와 플레이어가 줄을 따라가게 합니다. 기본은 꺼짐이며, 지시 전에는 아무것도 내려받지 않습니다.',
     karaokeEnable: '새 트랙에 자동으로 타이밍 넣기',
